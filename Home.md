@@ -90,6 +90,11 @@ In the included testing/ directory, you'll find a small sample of fastq reads fr
                    --verbose_level 2  
 
 
+## Contact Us
+
+Questions, comments, etc?
+
+Visit our Google group <https://groups.google.com/forum/#!forum/star-fusion>
 
 ## Acknowledgements
 
