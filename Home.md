@@ -68,11 +68,11 @@ STX16--RAE1     4       33      ONLY_REF_SPLICE STX16^ENSG00000124222.17        
 RPS6KB1--SNF8   1       42      ONLY_REF_SPLICE RPS6KB1^ENSG00000108443.9       chr17:57970686:+        SNF8^ENSG00000159210.5  chr17:4702133
 ```
 
-The JunctionReads column indicates the number of RNA-Seq fragments containing a read that aligns as a split read at the site if the putative fusion junction.   
+The JunctionReads column indicates the number of RNA-Seq fragments containing a read that aligns as a split read at the site of the putative fusion junction.   
 
 The SpanningFrags column indicates the number of RNA-Seq fragments that span the fusion junction such that one read of the pair aligns to a different gene than the other paired-end read of that fragment.
 
->False positive predictions are common and those predictions that have very few JunctionReads and SpanningReads are going to be enriched for false positives. Note, depending on the site of the fusion breakpoint and length of the reads, it may not be possible to have SpanningFragments and all evidence may show up in the form of JunctionReads.
+>Those predictions that have very few JunctionReads and SpanningReads are going to be enriched for false positives. Note, depending on the site of the fusion breakpoint and length of the reads, it may not be possible to have SpanningFragments and all evidence may show up in the form of JunctionReads.
 
 The .final.abridged output file contents are shown above. See the unabridged '.final' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments.
 
