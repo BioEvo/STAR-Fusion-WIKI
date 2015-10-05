@@ -50,75 +50,44 @@ Given paired-end of FASTQ files, run STAR-Fusion like so:
      STAR-Fusion --genome_lib_dir /path/to/your/Hg19_CTAT_resource_lib \
                  --left_fq reads_1.fq \
                  --right_fq reads_2.fq \
+                 --output_dir star_fusion_outdir
                  
 
-The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_candidates.final', and has the following format:
+The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_candidates.final.abridged', and has the following format:
 
 ```
- #fusion_name    JunctionReads   SpanningFrags   LeftGene        LeftBreakpoint  LeftDistFromRefExonSplice       RightGene       RightBreakpoint RightDistFromRefExonSplice
- FIP1L1--PDGFRA  98      13      FIP1L1^ENSG00000145216.11       chr4:54292132:+ 0       PDGFRA^ENSG00000134853.7        chr4:55141092:+ 84
- BRD4--NUTM1     7       2       BRD4^ENSG00000141867.13 chr19:15364963:-        0       NUTM1^ENSG00000184507.11        chr15:34640170:+        0
- EWSR1--FLI1     5       2       EWSR1^ENSG00000182944.13        chr22:29683123:+        0       FLI1^ENSG00000151702.12 chr11:128677075:+       0
- GOPC--ROS1      82      36      GOPC^ENSG00000047932.9  chr6:117888017:-        0       ROS1^ENSG00000047936.6  chr6:117642557:-        0
- ETV6--NTRK3     8       3       ETV6^ENSG00000139083.6  chr12:12022903:+        0       NTRK3^ENSG00000140538.12        chr15:88483984:-        0
- FGFR3--TACC3    221     372     FGFR3^ENSG00000068078.13        chr4:1808661:+  0       TACC3^ENSG00000013810.14        chr4:1729704:+  269
- EWSR1--ATF1     8       3       EWSR1^ENSG00000182944.13        chr22:29683123:+        0       ATF1^ENSG00000123268.4  chr12:51208063:+        0
- HOOK3--RET      9       2       HOOK3^ENSG00000168172.4 chr8:42823357:+ 0       RET^ENSG00000165731.13  chr10:43612032:+        0
- CD74--ROS1      5       0       CD74^ENSG00000019582.10 chr5:149784243:-        0       ROS1^ENSG00000047936.6  chr6:117645578:-        0
- TMPRSS2--ETV1   10      3       TMPRSS2^ENSG00000184012.7       chr21:42866302:-        19      ETV1^ENSG00000006468.9  chr7:13975463:- 58
- AKAP9--BRAF     4       4       AKAP9^ENSG00000127914.12        chr7:91632549:+ 0       BRAF^ENSG00000157764.8  chr7:140487384:-        0
- ...
+#fusion_name    JunctionReads   SpanningFrags   Splice_type     LeftGene        LeftBreakpoint  RightGene       RightBreakpoint
+CACNG6--RPLP2   31      0       INCL_NON_REF_SPLICE     CACNG6^ENSG00000130433.3        chr19:54515460:+        RPLP2^ENSG00000177600.4 chr11:810019:+  
+ACACA--STAC2    12      51      ONLY_REF_SPLICE ACACA^ENSG00000132142.15        chr17:35479453:-        STAC2^ENSG00000141750.6 chr17:37374426:-        
+RPS6KB1--SNF8   9       42      INCL_NON_REF_SPLICE     RPS6KB1^ENSG00000108443.9       chr17:57970686:+        SNF8^ENSG00000159210.5  chr17:47021337:-        
+VAPB--IKZF3     3       46      ONLY_REF_SPLICE VAPB^ENSG00000124164.11 chr20:56964573:+        IKZF3^ENSG00000161405.12        chr17:37934020:-        
+VAPB--IKZF3     2       46      ONLY_REF_SPLICE VAPB^ENSG00000124164.11 chr20:56964573:+        IKZF3^ENSG00000161405.12        chr17:37922746:-        
+ZMYND8--CEP250  2       44      ONLY_REF_SPLICE ZMYND8^ENSG00000101040.15       chr20:45852970:-        CEP250^ENSG00000126001.11       chr20:34078463:+        
+TOB1--SYNRG     5       30      INCL_NON_REF_SPLICE     TOB1^ENSG00000141232.4  chr17:48943419:-        SYNRG^ENSG00000006114.11        chr17:35880751:-        
+STX16--RAE1     4       33      ONLY_REF_SPLICE STX16^ENSG00000124222.17        chr20:57227143:+        RAE1^ENSG00000101146.8  chr20:55929088:+        
+RPS6KB1--SNF8   1       42      ONLY_REF_SPLICE RPS6KB1^ENSG00000108443.9       chr17:57970686:+        SNF8^ENSG00000159210.5  chr17:4702133
 ```
 
-Note, these fusion candidates are derived based on mapping the STAR outputs to the reference annotations.  Paralogous genes are notorious for showing up as false-positive fusion candidates. Initial/preliminary predictions are found in file 'star-fusion.fusion_predictions.preliminary'. These are filtered using BLASTN, and those preliminary predictions that are excluded are prefixed with '#' in the file 'star-fusion.fusion_predictions.preliminary.filt', and the BLAST results are included in additional column fields for such entries.  Those that are not flagged as likely artifacts are reported in the final report file 'star-fusions.fusion_predictions.final'.  To turn off filtering (the BLAST step), simply run STAR-Fusion with the '--no_filter' parameter. See usage information (--help) for additional options).
+The JunctionReads column indicates the number of RNA-Seq fragments containing a read that aligns as a split read at the site if the putative fusion junction.   
 
+The SpanningFrags column indicates the number of RNA-Seq fragments that span the fusion junction such that one read of the pair aligns to a different gene than the other paired-end read of that fragment.
 
-## Parameterization 
+>False positive predictions are common and those predictions that have very few JunctionReads and SpanningReads are going to be enriched for false positives. Note, depending on the site of the fusion breakpoint and length of the reads, it may not be possible to have SpanningFragments and all evidence may show up in the form of JunctionReads.
 
-STAR-Fusion will report all candidates having at least 1 junction read where the breakpoints match up precisely with reference exon junctions of two different genes.
-
-For those breakpoints that do not precisely match at reference exon junctions, the breakpoint fusion read support must be at least --min_novel_junction_support (default 10 reads).
-
-In the case where multiple candidate fusion breakpoints are reported, only those breakpoints having at least --min_alt_pct_junction (default 10%) of the dominant isoform junction support will be reported.
-
-Finally, it is worth noting that the counts of spanning fragments are entirely non-overlapping with the counts of the breakpoint junction reads. That is, no spanning fragment (from Chimeric.out.sam) is counted if it contains a read that is reported as evidence in the breakpoint junction candidate data (from Chimeric.out.junction).
+The .final.abridged output file contents are shown above. See the unabridged '.final' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments.
 
 
 
 ## Example data and execution:
 
-In the included test/ directory, you'll find a 'runMe.sh' script along with a data/ subdirectory.  The data/ subdirectory contains example fusion and spanning data generated from running STAR, in addition to a reference annotation file for gencode v19. Note, the reference GTF file contains only the 'exon' records instead of all lines from the original gencode annotation file; this speeds up parsing of the file and keeps the file size relatively small for including in this package.
+In the included testing/ directory, you'll find a small sample of fastq reads from a tumor sample.  Find fusions using the Hg19 resource set like so:
 
-In this test/ directory, Run the sample execution like so:
-
-    ./runMe.sh
-
-which simply runs:
-
-    ../STAR-Fusion -S Chimeric.out.sam.gz -J Chimeric.out.junction.gz 
-
-and you'll find the output file 'star-fusion.fusion_candidates.txt' containing the fusion candidates in the format described above.
-
-
-## Integrating alternative genome resources
-
-STAR-Fusion comes with reference annotations and sequences based on the human reference genome Hg19 and gencode annotations.  
-
-If you wish to use a different genome and set of reference annotations, you can install them as follows.
-
-You'll need a reference genome (ie. my_genome.fasta) and reference transcript structure annotations (ie. my_annotations.gtf).  This GTF file should include 'exon' features and contain attributes for 'gene_id', 'transcript_id', and optionally but recommended 'gene_name' to preferentially use gene symbols.
-
-Generate a specially formatted reference cDNA fasta file like so:
-
-    util/gtf_file_to_cDNA_seqs.pl my_annotations.gtf my_genome.fasta > my_cdna.fasta
-
-and then build an index for the my_cdna.fasta file like so:
-
-    util/index_cdna_seqs.pl my_cdna.fasta
-
-
-When running STAR-Fusion, specify '--ref_GTF my_annotations.gtf' and '--ref_cdna my_cdna.fasta' to make use of these alternative targets.
-
+    cd testing/
+     
+    ../STAR-Fusion --left_fq reads_1.fq.gz --right_fq reads_2.fq.gz \
+                   -O star_fusion_outdir \
+                   --genome_lib_dir  /path/to/your/Hg19_CTAT_resource_lib \
+                   --verbose_level 2  
 
 
 
