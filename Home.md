@@ -43,7 +43,7 @@ Once the build process completes successfully, you can then refer to the above l
 
 
 
-## Running STAR-Fusion 
+## Running STAR-Fusion starting with FASTQ files:
 
 Given paired-end of FASTQ files, run STAR-Fusion like so:
 
@@ -52,6 +52,36 @@ Given paired-end of FASTQ files, run STAR-Fusion like so:
                  --right_fq reads_2.fq \
                  --output_dir star_fusion_outdir
                  
+
+## Alternatively, running STAR yourself, and then running STAR-Fusion using the existing outputs:
+
+It's not always the case that you want to have STAR-Fusion run STAR directly, as you may have already run STAR earlier on, or prefer to run STAR separately to use the outputs in other processes such as for expression estimates or variant detection.
+
+Parameters that we recommend for running STAR as part of STAR-Fusion are as follows:
+
+     STAR --genomeDir ${star_index_dir} \                                                                                     
+          --readFilesIn ${left_fq_filename} ${right_fq_filename} \                                                                      
+          --twopassMode Basic \                                                                                                      
+          --outReadsUnmapped None \                                                                                                  
+          --chimSegmentMin 12 \                                                                                                    
+          --chimJunctionOverhangMin 12 \                                                                                           
+          --alignSJDBoverhangMin 10 \                                                                                              
+          --alignMatesGapMax 200000 \                                                                                             
+          --alignIntronMax 200000 \                                                                                                
+          --chimSegmentReadGapMax parameter 3 \                                                                                    
+          --alignSJstitchMismatchNmax 5 -1 5 5 \
+          --runThreadN ${THREAD_COUNT} \                                                                                                           
+          --limitBAMsortRAM 31532137230 \                                                                                           
+          --outSAMtype BAM SortedByCoordinate 
+
+This will (in part) generate a file called 'Chimeric.out.junction', which is used by STAR-Fusion like so:
+
+     STAR-Fusion --genome_lib_dir /path/to/your/Hg19_CTAT_resource_lib \
+                 -J Chimeric.out.junction \
+                 --output_dir star_fusion_outdir
+
+
+## Output from STAR-Fusion
 
 The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_candidates.final.abridged', and has the following format:
 
