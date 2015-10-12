@@ -19,6 +19,11 @@ In addition to STAR-Fusion, the following tools and resource data sets must be i
  	
 >The Set::IntervalTree module tends to install trouble-free on Linux.  Note, if you have trouble installing Set::IntervalTree on Mac OS X (as I did), try the following:  download the tarball from the http://search.cpan.org/~benbooth/Set-IntervalTree-0.02/lib/Set/IntervalTree.pm, run the perl Makefile.pl, then edit the generated 'Makefile' and remove all occurrences of '-arch i386'. Then try 'make', 'make test', and finally 'make install'.
 
+## Computing / Hardware requirements
+
+If you're planning to run STAR to align reads to the human genome, then you'll need ~30G RAM.   If you've already run STAR and are just planning on running STAR-Fusion given the existing STAR outputs, then modest resources are required and it should run on any commodity hardware.
+
+
 ### Data Resources Required:
 
 A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide these resources for human fusion transcript detection using Hg19 and gencode.v19 annotations as [Hg19_CTAT_resource_lib.tar.gz](ftp://ftp.broadinstitute.org/pub/Trinity/CTAT_RESOURCE_LIB/Hg19_CTAT_resource_lib.tar.gz).  If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.
