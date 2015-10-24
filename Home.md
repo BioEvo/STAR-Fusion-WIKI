@@ -26,7 +26,7 @@ If you're planning to run STAR to align reads to the human genome, then you'll n
 
 ### Data Resources Required:
 
-A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide these resources for human fusion transcript detection using Hg19 and gencode.v19 annotations as [Hg19_CTAT_resource_lib.tar.gz](ftp://ftp.broadinstitute.org/pub/Trinity/CTAT_RESOURCE_LIB/Hg19_CTAT_resource_lib.tar.gz).  If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.
+A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide these resources for human fusion transcript detection using Hg19 and gencode.v19 annotations as [Hg19_CTAT_resource_lib.tar.gz](https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/Hg19_CTAT_resource_lib.tar.gz).  If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.
 
 Assuming the use of our Hg19_CTAT_resource_lib.tar.gz resource data set, build the various indexes required by STAR-Fusion like so:
 
