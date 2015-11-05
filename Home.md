@@ -133,7 +133,7 @@ Visit our STAR-fusion Google group <https://groups.google.com/forum/#!forum/star
 
 ## Acknowledgements
 
-This effort was largely inspired by earlier work done by Nicolas Stransky and by Daniel Nicorici.
+This effort was largely inspired by earlier work done by Nicolas Stransky in the landmark publication "The landscape of kinase fusions in cancer" by [Stransky et al., Nat Commun 2014](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4175590/), in addition to very nice work done by Daniel Nicorici with his [FusionCatcher software](http://biorxiv.org/content/early/2014/11/19/011650).
 
 STAR-Fusion is contributed by Brian Haas (@Broad Institute), in collaboration with Alex Dobin (@CSHL).
 
