@@ -26,13 +26,15 @@ If you're planning to run STAR to align reads to the human genome, then you'll n
 
 ### Data Resources Required:
 
-A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide these resources for human fusion transcript detection using Hg19 and gencode.v19 annotations as [Hg19_CTAT_resource_lib.tar.gz](https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/Hg19_CTAT_resource_lib.tar.gz).  If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.
+A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide several alternative resources for human fusion transcript detection depending on whether you want to use GRCh37 or GRCh38 reference human genomes and corresponding Gencode annotation sets.  Options are available here: <https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/>, so choose one, and below we refer to it as 'CTAT_resource_lib.tar.gz'.   The gene annotations in each case are restricted to the protein-coding and lincRNA transcripts.
+
+If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.
 
 Assuming the use of our Hg19_CTAT_resource_lib.tar.gz resource data set, build the various indexes required by STAR-Fusion like so:
 
-     tar xvf Hg19_CTAT_resource_lib.tar.gz
+     tar xvf CTAT_resource_lib.tar.gz
 
-     cd Hg19_CTAT_resource_lib/
+     cd CTAT_resource_lib/
 
      $STAR_FUSION_HOME/FusionFilter/prep_genome_lib.pl \
                              --genome_fa ref_genome.fa \
@@ -42,7 +44,7 @@ Assuming the use of our Hg19_CTAT_resource_lib.tar.gz resource data set, build t
 
 Once the build process completes successfully, you can then refer to the above like so with STAR-Fusion:
 
-       STAR-Fusion --genome_lib_dir /path/to/your/Hg19_CTAT_resource_lib   ...
+       STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib   ...
 
        # full usage info provided below.
 
@@ -52,7 +54,7 @@ Once the build process completes successfully, you can then refer to the above l
 
 Given paired-end of FASTQ files, run STAR-Fusion like so:
 
-     STAR-Fusion --genome_lib_dir /path/to/your/Hg19_CTAT_resource_lib \
+     STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \
                  --left_fq reads_1.fq \
                  --right_fq reads_2.fq \
                  --output_dir star_fusion_outdir
@@ -81,7 +83,7 @@ Parameters that we recommend for running STAR as part of STAR-Fusion are as foll
 
 This will (in part) generate a file called 'Chimeric.out.junction', which is used by STAR-Fusion like so:
 
-     STAR-Fusion --genome_lib_dir /path/to/your/Hg19_CTAT_resource_lib \
+     STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \
                  -J Chimeric.out.junction \
                  --output_dir star_fusion_outdir
 
@@ -115,13 +117,13 @@ The .final.abridged output file contents are shown above. See the unabridged '.f
 
 ## Example data and execution:
 
-In the included testing/ directory, you'll find a small sample of fastq reads from a tumor sample.  Find fusions using the Hg19 resource set like so:
+In the included testing/ directory, you'll find a small sample of fastq reads from a tumor sample.  Find fusions using the resource set like so:
 
     cd testing/
      
     ../STAR-Fusion --left_fq reads_1.fq.gz --right_fq reads_2.fq.gz \
                    -O star_fusion_outdir \
-                   --genome_lib_dir  /path/to/your/Hg19_CTAT_resource_lib \
+                   --genome_lib_dir  /path/to/your/CTAT_resource_lib \
                    --verbose_level 2  
 
 
