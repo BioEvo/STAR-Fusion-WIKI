@@ -114,6 +114,8 @@ Since the number of fusion-supporting reads depends on both the expression of th
 
 The 'LargeAnchorSupport' column indicates whether there are split reads that provide 'long' (set to length of 25 bases) alignments on both sides of the putative breakpoint.  Those fusions supported only by split reads (no spanning fragments) and lack LargeAnchorSupport are often highly suspicious and tend to be false positives.  Those with LargeAnchorSupport are labeled as 'YES_LDAS' (where LDAS = long double anchor support.... yes, more jargon).
 
+'SpliceType' indicates whether the proposed breakpoint occurs at reference exon junctions as provided by the reference transcript structure annotations (ex. gencode).
+
 The .final.abridged.FFPM output file contents are shown above. See the unabridged '.final' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments.
 
 If there are alternatively spliced isoforms for fusion transcripts, the same fusion pair will be listed as multiple entries but with different breakpoints identified.
