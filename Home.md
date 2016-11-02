@@ -96,8 +96,6 @@ The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.
 #FusionName                  JunctionReadCount  SpanningFragCount  SpliceType           LeftGene                         LeftBreakpoint     RightGene                        RightBreakpoint    LargeAnchorSupport  J_FFPM      S_FFPM
 THRA--AC090627.1             68                 98                 ONLY_REF_SPLICE      THRA^ENSG00000126351.8           chr17:38243106:+   AC090627.1^ENSG00000235300.3     chr17:46371709:+   YES_LDAS            47585.7243  68579.4262
 ACACA--STAC2                 40                 46                 ONLY_REF_SPLICE      ACACA^ENSG00000132142.15         chr17:35479453:-   STAC2^ENSG00000141750.6          chr17:37374426:-   YES_LDAS            27991.6025  32190.3429
-MT-ND5--MT-RNR2              3                  126                INCL_NON_REF_SPLICE  MT-ND5^ENSG00000198786.2         chrM:13854:+       MT-RNR2^ENSG00000210082.2        chrM:2225:+        NO_LDAS             2099.3702   88173.5479
-MT-ND5--MT-RNR2              3                  126                INCL_NON_REF_SPLICE  MT-ND5^ENSG00000198786.2         chrM:14016:+       MT-RNR2^ENSG00000210082.2        chrM:2218:+        YES_LDAS            2099.3702   88173.5479
 VAPB--IKZF3                  15                 45                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11          chr20:56964573:+   IKZF3^ENSG00000161405.12         chr17:37934020:-   YES_LDAS            10496.8509  31490.5528
 TOB1--SYNRG                  16                 33                 ONLY_REF_SPLICE      TOB1^ENSG00000141232.4           chr17:48943419:-   SYNRG^ENSG00000006114.11         chr17:35880751:-   YES_LDAS            11196.6410  23093.0721
 RPS6KB1--SNF8                11                 44                 ONLY_REF_SPLICE      RPS6KB1^ENSG00000108443.9        chr17:57970686:+   SNF8^ENSG00000159210.5           chr17:47021337:-   YES_LDAS            7697.6907   30790.7628
@@ -118,8 +116,7 @@ The 'LargeAnchorSupport' column indicates whether there are split reads that pro
 
 The .final.abridged.FFPM output file contents are shown above. See the unabridged '.final' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments.
 
-
-
+If there are alternatively spliced isoforms for fusion transcripts, the same fusion pair will be listed as multiple entries but with different breakpoints identified.
 
 
 ## Example data and execution:
