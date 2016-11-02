@@ -112,7 +112,13 @@ The SpanningFrags column indicates the number of RNA-Seq fragments that span the
 
 >Those predictions that have very few JunctionReads and SpanningReads are going to be enriched for false positives. Note, depending on the site of the fusion breakpoint and length of the reads, it may not be possible to have SpanningFragments and all evidence may show up in the form of JunctionReads.
 
-The .final.abridged output file contents are shown above. See the unabridged '.final' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments.
+Since the number of fusion-supporting reads depends on both the expression of the fusion transcript and the number of reads sequenced, we provide normalized measures of the split reads and spanning fragments as FFPM (fusion fragments per million total reads) measures:  J_FFPM for the junction/split reads and S_FFPM for the spanning fragments.  If you sum them (a column not yet included but will be soon), you can filter based on this value to remove many lowly expressed and likely artifact fusions.  A filter of 0.1 sum FFPM tends to be very effective.
+
+The 'LargeAnchorSupport' column indicates whether there are split reads that provide 'long' (set to length of 25 bases) alignments on both sides of the putative breakpoint.  Those fusions supported only by split reads (no spanning fragments) and lack LargeAnchorSupport are often highly suspicious and tend to be false positives.  Those with LargeAnchorSupport are labeled as 'YES_LDAS' (where LDAS = long double anchor support.... yes, more jargon).
+
+The .final.abridged.FFPM output file contents are shown above. See the unabridged '.final' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments.
+
+
 
 
 
