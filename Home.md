@@ -10,12 +10,15 @@ In addition to STAR-Fusion, the following tools and resource data sets must be i
 ### Tools Required:
 
 *  STAR <https://github.com/alexdobin/STAR>
-*  the following non-standard Perl modules from CPAN: Set/IntervalTree.pm and DB_File.pm
+*  some non-standard Perl modules - see below:
   
-    A typical perl module installation may involve:
-    perl -MCPAN -e shell
-      install Set::IntervalTree
-      install DB_File
+.
+
+       A typical perl module installation may involve:
+       perl -MCPAN -e shell
+       install Set::IntervalTree
+       install DB_File
+       install URI::Escape
  	
 >The Set::IntervalTree module tends to install trouble-free on Linux.  Note, if you have trouble installing Set::IntervalTree on Mac OS X (as I did), try the following:  download the tarball from the http://search.cpan.org/~benbooth/Set-IntervalTree-0.02/lib/Set/IntervalTree.pm, run the perl Makefile.pl, then edit the generated 'Makefile' and remove all occurrences of '-arch i386'. Then try 'make', 'make test', and finally 'make install'.
 
@@ -28,9 +31,15 @@ If you're planning to run STAR to align reads to the human genome, then you'll n
 
 A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide several alternative resources for human fusion transcript detection depending on whether you want to use GRCh37 or GRCh38 reference human genomes and corresponding Gencode annotation sets.  Options are available here: <https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/>, so choose one, and below we refer to it as 'CTAT_resource_lib.tar.gz'.   The gene annotations in each case are restricted to the protein-coding and lincRNA transcripts.
 
-If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.
 
-Assuming the use of our Hg19_CTAT_resource_lib.tar.gz resource data set, build the various indexes required by STAR-Fusion like so:
+If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.  FusionFilter comes included in the STAR-Fusion software.
+
+
+## Preparing the genome resource lib
+
+If you downloaded the large (30G) 'prebuilt' resource lib, then just untar/gz the archive and use it directly. 
+
+Otherwise, if you downloaded the small (~2G) unprocessed resource lib, then you'll need to prep it for use with STAR-fusion as follows: 
 
      tar xvf CTAT_resource_lib.tar.gz
 
@@ -87,21 +96,25 @@ This will (in part) generate a file called 'Chimeric.out.junction', which is use
                  -J Chimeric.out.junction \
                  --output_dir star_fusion_outdir
 
+>Note, include the --left_fq and --right_fq parameters along with the -J Chimeric.out.junction in order to compute the FFPM (normalized fusion fragments per million total rna-seq fragments) values in your summary report. Otherwise, you'll just get evidence fragment counts without the normalized values.
 
 ## Output from STAR-Fusion
 
 The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_candidates.final.abridged', and has the following format:
 
 ```
-#FusionName                  JunctionReadCount  SpanningFragCount  SpliceType           LeftGene                         LeftBreakpoint     RightGene                        RightBreakpoint    LargeAnchorSupport  J_FFPM      S_FFPM
-THRA--AC090627.1             68                 98                 ONLY_REF_SPLICE      THRA^ENSG00000126351.8           chr17:38243106:+   AC090627.1^ENSG00000235300.3     chr17:46371709:+   YES_LDAS            47585.7243  68579.4262
-ACACA--STAC2                 40                 46                 ONLY_REF_SPLICE      ACACA^ENSG00000132142.15         chr17:35479453:-   STAC2^ENSG00000141750.6          chr17:37374426:-   YES_LDAS            27991.6025  32190.3429
-VAPB--IKZF3                  15                 45                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11          chr20:56964573:+   IKZF3^ENSG00000161405.12         chr17:37934020:-   YES_LDAS            10496.8509  31490.5528
-TOB1--SYNRG                  16                 33                 ONLY_REF_SPLICE      TOB1^ENSG00000141232.4           chr17:48943419:-   SYNRG^ENSG00000006114.11         chr17:35880751:-   YES_LDAS            11196.6410  23093.0721
-RPS6KB1--SNF8                11                 44                 ONLY_REF_SPLICE      RPS6KB1^ENSG00000108443.9        chr17:57970686:+   SNF8^ENSG00000159210.5           chr17:47021337:-   YES_LDAS            7697.6907   30790.7628
-VAPB--IKZF3                  2                  45                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11          chr20:56964573:+   IKZF3^ENSG00000161405.12         chr17:37922746:-   NO_LDAS             1399.5801   31490.5528
-VAPB--IKZF3                  2                  45                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11          chr20:56964573:+   IKZF3^ENSG00000161405.12         chr17:37944627:-   YES_LDAS            1399.5801   31490.5528
-STX16--RAE1                  4                  35                 ONLY_REF_SPLICE      STX16^ENSG00000124222.17         chr20:57227143:+   RAE1^ENSG00000101146.8           chr20:55929088:+   YES_LDAS            2799.1603   24492.6522
+#FusionName                  JunctionReadCount  SpanningFragCount  SpliceType           LeftGene                        LeftBreakpoint    RightGene                        RightBreakpoint   LargeAnchorSupport  LeftBreakDinuc  LeftBreakEntropy  RightBreakDinuc  RightBreakEntropy  J_FFPM     S_FFPM
+THRA--AC090627.1             27                 93                 ONLY_REF_SPLICE      THRA^ENSG00000126351.8          chr17:38243106:+  AC090627.1^ENSG00000235300.3     chr17:46371709:+  YES_LDAS            GT              1.8892            AG               1.9656             5372.0653  18503.7803
+THRA--AC090627.1             5                  93                 ONLY_REF_SPLICE      THRA^ENSG00000126351.8          chr17:38243106:+  AC090627.1^ENSG00000235300.3     chr17:46384693:+  YES_LDAS            GT              1.8892            AG               1.4295             994.8269   18503.7803
+ACACA--STAC2                 12                 51                 ONLY_REF_SPLICE      ACACA^ENSG00000132142.15        chr17:35479453:-  STAC2^ENSG00000141750.6          chr17:37374426:-  YES_LDAS            GT              1.9656            AG               1.9656             2387.5846  10147.2344
+RPS6KB1--SNF8                10                 43                 ONLY_REF_SPLICE      RPS6KB1^ENSG00000108443.9       chr17:57970686:+  SNF8^ENSG00000159210.5           chr17:47021337:-  YES_LDAS            GT              1.3753            AG               1.8323             1989.6538  8555.5113
+TOB1--SYNRG                  8                  30                 ONLY_REF_SPLICE      TOB1^ENSG00000141232.4          chr17:48943419:-  SYNRG^ENSG00000006114.11         chr17:35880751:-  YES_LDAS            GT              1.4566            AG               1.8892             1591.7230  5968.9614
+VAPB--IKZF3                  4                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37934020:-  YES_LDAS            GT              1.9656            AG               1.7819             795.8615   9152.4075
+ZMYND8--CEP250               2                  44                 ONLY_REF_SPLICE      ZMYND8^ENSG00000101040.15       chr20:45852970:-  CEP250^ENSG00000126001.11        chr20:34078463:+  NO_LDAS             GT              1.8295            AG               1.8062             397.9308   8754.4767
+AHCTF1--NAAA                 3                  38                 ONLY_REF_SPLICE      AHCTF1^ENSG00000153207.10       chr1:247094880:-  NAAA^ENSG00000138744.10          chr4:76846964:-   YES_LDAS            GT              1.7232            AG               1.8062             596.8961   7560.6844
+VAPB--IKZF3                  1                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37944627:-  NO_LDAS             GT              1.9656            AG               1.8892             198.9654   9152.4075
+VAPB--IKZF3                  1                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37922746:-  NO_LDAS             GT              1.9656            AG               1.9329             198.9654   9152.4075
+STX16--RAE1                  4                  33                 ONLY_REF_SPLICE      STX16^ENSG00000124222.17        chr20:57227143:+  RAE1^ENSG00000101146.8           chr20:55929088:+  YES_LDAS            GT              1.9899            AG               1.9656             795.8615   6565.8575
 ```
 
 The JunctionReads column indicates the number of RNA-Seq fragments containing a read that aligns as a split read at the site of the putative fusion junction.   
