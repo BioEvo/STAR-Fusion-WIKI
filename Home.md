@@ -146,6 +146,40 @@ In the included testing/ directory, you'll find a small sample of fastq reads fr
                    --verbose_level 2  
 
 
+## Further Inspection, Visualization, and Validation?
+
+We have a companion tool called FusionInspector <https://github.com/FusionInspector/FusionInspector/wiki> that provides a more in-depth view of the evidence supporting the predicted fusions.  FusionInspector can also run [Trinity](http://trinityrnaseq.github.io) to de novo reconstruct your predicted fusion transcripts based on the identified fusion-supporting RNA-Seq reads.
+
+## Want to use Docker?
+
+We provide a Docker image that contains all software pre-installed for running STAR, STAR-Fusion, and FusionInspector, and it's available here: https://hub.docker.com/r/trinityctat/ctatfusion/
+
+If you have docker installed, you can pull the image like so:
+
+    docker pull trinityctat/ctatfusion
+
+STAR-Fusion could be run like so via Docker:
+
+    docker run -v `pwd`/../:/data --rm trinityctat/ctatfusion \
+          /usr/local/src/STAR-Fusion-v1.0.0/STAR-Fusion \
+          --left_fq /data/testing/reads_1.fq.gz \
+          --right_fq /data/testing/reads_2.fq.gz \
+          --genome_lib_dir /data/GRCh37_gencode_v19_CTAT_lib_July272016_prebuilt \
+          -O /data/testing/test_docker_outdir/StarFusionOut
+
+and FusionInspector could be run like so, given the output from STAR-Fusion as run above:
+
+    docker run -v `pwd`/../:/data --rm trinityctat/ctatfusion \
+           /usr/local/src/FusionInspector-v1.0.1/FusionInspector \
+           --fusions /data/testing/test_docker_outdir/StarFusionOut/star-fusion.fusion_candidates.final.abridged.FFPM \
+           --left_fq /data/testing/reads_1.fq.gz \
+           --right_fq /data/testing/reads_2.fq.gz \
+           --genome_lib /data/GRCh37_gencode_v19_CTAT_lib_July272016_prebuilt \
+           --out_prefix finspector \
+           --out_dir /data/testing/test_docker_outdir/FusionInspectorOut \
+           --include_Trinity
+
+
 ## Contact Us
 
 Questions, comments, etc?
