@@ -119,7 +119,7 @@ STX16--RAE1                  4                  33                 ONLY_REF_SPLI
 
 The JunctionReads column indicates the number of RNA-Seq fragments containing a read that aligns as a split read at the site of the putative fusion junction.   
 
-The SpanningFrags column indicates the number of RNA-Seq fragments that span the fusion junction such that one read of the pair aligns to a different gene than the other paired-end read of that fragment.
+The SpanningFrags column indicates the number of RNA-Seq fragments that encompass the fusion junction such that one read of the pair aligns to a different gene than the other paired-end read of that fragment.
 
 >Those predictions that have very few JunctionReads and SpanningReads are going to be enriched for false positives. Note, depending on the site of the fusion breakpoint and length of the reads, it may not be possible to have SpanningFragments and all evidence may show up in the form of JunctionReads.
 
