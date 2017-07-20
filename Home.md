@@ -93,6 +93,14 @@ Given paired-end of FASTQ files, run STAR-Fusion like so:
                  --right_fq reads_2.fq \
                  --output_dir star_fusion_outdir
                  
+If you have single-end FASTQ files, just use the --left_fq parameter:
+
+     STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \
+                 --left_fq reads_1.fq \ 
+                 --output_dir star_fusion_outdir
+
+>Note, unless you have relatively long single-end reads (ex. at least 100 base length), you will be underpowered for detecting fusion transcripts.
+
 
 ## Alternatively, running STAR yourself, and then running STAR-Fusion using the existing outputs:
 
