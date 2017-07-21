@@ -298,7 +298,7 @@ STAR-Fusion could be run like so via Docker, for example, running within the '${
     wget ${CTAT_GENOME_LIB_URL} -O ../${CTAT_GENOME_LIB}.tar.gz
 
     # unpacking it
-    tar xvf "../${CTAT_GENOME_LIB}.tar.gz -C ../.
+    tar xvf ../${CTAT_GENOME_LIB}.tar.gz -C ../.
 
     # and now running STAR-Fusion & FusionInspector 'inspect' & Trinity de-novo reconstruction via Docker:
     docker run -v `pwd`/../:/data --rm trinityctat/ctatfusion:${VERSION} \
