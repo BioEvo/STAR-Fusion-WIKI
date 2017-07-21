@@ -6,5 +6,6 @@
    * [Kickstart mode](Home#KickstartMode)
 * [Fusion Outputs](Home#Outputs)
 * [Inspection and Validation](Home#InspectionValidation)
+* [Fusion Annotation](Home#FusionAnnotation)
 * [Example data and execution](Home#ExampleData) 
 * [Contact us](Home#ContactUs)
