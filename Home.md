@@ -271,6 +271,16 @@ The reconstructed transcripts described above by the 'fusion coding effect' modu
 
 [Trinity](http://trinityrnaseq.github.io) is used to assemble reads aligned to fusion contigs constructed by FusionInspector.  If FusionInspector 'inspect' mode is invoked, then only the fusion-evidence reads are de novo assembled.  If FusionInspector 'validate' mode is selected, then all reads aligned to the fusion gene contigs are assembled.  Trinity contigs identified as fusion transcripts via our included [GMAP-fusion](https://github.com/GMAP-fusion/GMAP-fusion/wiki) utility are captured and reported.  The de novo reconstructed fusion transcripts are provided as a FASTA file '${star_fusion_output_directory}/FusionInspector/finspector.gmap_trinity_GG.fusions.fasta', and the transcript accessions are reported in the FusionInspector tab-delimited summary output file.
 
+An example Trinity-reconstructed fusion transcript is:
+
+    >TRINITY_GG_12_c0_g1_i1 VAPB--IKZF3:1396-28254
+    CGGTGTCTGGACCAAGGGGCGCAGGGCTTCGGCGCCAAGATAGCTGATGGCGTTATTGATGGCTTGGTCCATCATGCGGG
+    TCTGTATGAGCTCACTCTCTTTCTCATACATGTAACTTGAATTATAGTTGACATCAAAGCAGTGGCGCTTCTCACCAATG
+    AATTTCTGAGGCATTGAGCTTTTTCGTTTTGCCACATTGCTTGCTAATCTGTCCAGTACGAGAGCTCTTTCACTTCCCAT
+    CTCTGCTTTGATGTGTCTTGCCTCCGCACTTGCTCGGAATTTGAGCTCGTGCTGCGGCTCGAGGCTCAGGACCTGCTCCA
+    CCTTCGCCATGTTCCTTAGCGGCGGAGCACCTTTGGCGGGGAGACCCCTGAGAGGTCACCGGGGCGGGAAGCGTTAATGC
+    TGCGCCCGCTTTAAGTTTTACAAAAAGGCGGGGACCGGTCGGGGCACGGGCGGGGGTCCTCTACCG
+
 See our [FusionInspector wiki](https://github.com/FusionInspector/FusionInspector/wiki) for more details.
 
 <a name='ExampleData'></a>
