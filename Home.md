@@ -42,7 +42,7 @@ Please consider using a proper 'FULL' release version as described above.
        install Carp::Assert
        install JSON::XS
 
-
+<a name='ComputeRequirements'></a>
 ## Computing / Hardware requirements
 
 If you're planning to run STAR to align reads to the human genome, then you'll need ~30G RAM.   If you've already run STAR and are just planning on running STAR-Fusion given the existing STAR outputs, then modest resources are required and it should run on any commodity hardware.
@@ -84,7 +84,8 @@ Once the build process completes successfully, you can then refer to the above l
        # full usage info provided below.
 
 
-
+<a name='RunnningStarF'></a>
+<a name='RunFromFastq'></a>
 ## Running STAR-Fusion starting with FASTQ files:
 
 Given paired-end of FASTQ files, run STAR-Fusion like so:
@@ -102,8 +103,8 @@ If you have single-end FASTQ files, just use the --left_fq parameter:
 
 >Note, unless you have relatively long single-end reads (ex. at least 100 base length), you will be underpowered for detecting fusion transcripts.
 
-
-## Alternatively, running STAR yourself, and then running STAR-Fusion using the existing outputs:
+<a name='KickstartMode'></a>
+## Alternatively, Kickstart mode: running STAR yourself, and then running STAR-Fusion using the existing outputs
 
 It's not always the case that you want to have STAR-Fusion run STAR directly, as you may have already run STAR earlier on, or prefer to run STAR separately to use the outputs in other processes such as for expression estimates or variant detection.
 
@@ -132,21 +133,19 @@ This will (in part) generate a file called 'Chimeric.out.junction', which is use
 
 >Note, include the --left_fq and --right_fq parameters along with the -J Chimeric.out.junction in order to compute the FFPM (normalized fusion fragments per million total rna-seq fragments) values in your summary report. Otherwise, you'll just get evidence fragment counts without the normalized values.
 
+<a name='Outputs'></a>
 ## Output from STAR-Fusion
 
 The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_predictions.tsv', along with an abridged version that excludes the identification of the evidence fusion reads and called 'star-fusion.fusion_predictions.tsv', with the following format:
 
 ```
-#FusionName     JunctionReadCount       SpanningFragCount       SpliceType      LeftGene        LeftBreakpoint  RightGene
-       RightBreakpoint LargeAnchorSupport      LeftBreakDinuc  LeftBreakEntropy        RightBreakDinuc RightBreakEntropy
-       FFPM
+#FusionName     JunctionReadCount       SpanningFragCount       SpliceType      LeftGene        LeftBreakpoint  RightGene       RightBreakpoint LargeAnchorSupport      LeftBreakDinuc  LeftBreakEntropy        RightBreakDinuc RightBreakEntropy       FFPM
 THRA--THRA1/BTR 27      93      ONLY_REF_SPLICE THRA^ENSG00000126351.12 chr17:40086853:+        THRA1/BTR^ENSG00000235300.4     chr17:48294347:+        YES_LDAS        GT      1.8892  AG      1.9656  23875.8456
 THRA--THRA1/BTR 5       93      ONLY_REF_SPLICE THRA^ENSG00000126351.12 chr17:40086853:+        THRA1/BTR^ENSG00000235300.4     chr17:48307331:+        YES_LDAS        GT      1.8892  AG      1.4295  19498.6072
 ACACA--STAC2    12      52      ONLY_REF_SPLICE ACACA^ENSG00000278540.4 chr17:37122531:-        STAC2^ENSG00000141750.6 chr17:39218173:-        YES_LDAS        GT      1.9656  AG      1.9656  12733.7844
 RPS6KB1--SNF8   10      43      ONLY_REF_SPLICE RPS6KB1^ENSG00000108443.13      chr17:59893325:+        SNF8^ENSG00000159210.9  chr17:48943975:-        YES_LDAS        GT      1.3753  AG      1.8323  10545.1651
 TOB1--SYNRG     8       30      ONLY_REF_SPLICE TOB1^ENSG00000141232.4  chr17:50866058:-        SYNRG^ENSG00000275066.4 chr17:37520648:-        YES_LDAS        GT      1.4566  AG      1.8892  7560.6844
-VAPB--IKZF3     4       46      ONLY_REF_SPLICE VAPB^ENSG00000124164.15 chr20:58389517:+        IKZF3^ENSG00000161405.16
-        chr17:39777767:-        YES_LDAS        GT      1.9656  AG      1.7819  9948.269
+VAPB--IKZF3     4       46      ONLY_REF_SPLICE VAPB^ENSG00000124164.15 chr20:58389517:+        IKZF3^ENSG00000161405.16        chr17:39777767:-        YES_LDAS        GT      1.9656  AG      1.7819  9948.269
 ZMYND8--CEP250  2       44      ONLY_REF_SPLICE ZMYND8^ENSG00000101040.19       chr20:47224317:-        CEP250^ENSG00000126001.15       chr20:35490637:+        NO_LDAS GT      1.8295  AG      1.8062  9152.4075
 
 ```
@@ -168,7 +167,7 @@ The .final.abridged.FFPM output file contents are shown above. See the unabridge
 If there are alternatively spliced isoforms for fusion transcripts, the same fusion pair will be listed as multiple entries but with different breakpoints identified.
 
 
-
+<a name='InspectionValidation'></a>
 ## Further Inspection, Visualization, and Validation?
 
 We have a companion tool called FusionInspector <https://github.com/FusionInspector/FusionInspector/wiki> that provides a more in-depth view of the evidence supporting the predicted fusions.  FusionInspector can also run [Trinity](http://trinityrnaseq.github.io) to de novo reconstruct your predicted fusion transcripts based on the identified fusion-supporting RNA-Seq reads.
@@ -184,7 +183,7 @@ FusionInspector can be run in either 'inspect' or 'validate' mode when executed 
 If either mode is invoked, STAR-Fusion will run FusionInspector and create a FusionInspector/ output subdirectory containing all relevant output files.  See the [FusionInspector Wiki]( <https://github.com/FusionInspector/FusionInspector/wiki>) for documentation on output files and loading results into IGV for visualization. 
 
 
-
+<a name='ExampleData'></a>
 ## Example data and execution:
 
 In the included testing/ directory, you'll find a small sample of fastq reads from a tumor sample.  Find fusions using the resource set like so:
