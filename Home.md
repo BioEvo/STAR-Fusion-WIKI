@@ -134,21 +134,21 @@ This will (in part) generate a file called 'Chimeric.out.junction', which is use
 
 ## Output from STAR-Fusion
 
-The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_candidates.final.abridged', and has the following format:
+The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_predictions.tsv', along with an abridged version that excludes the identification of the evidence fusion reads and called 'star-fusion.fusion_predictions.tsv', with the following format:
 
 ```
-#FusionName                  JunctionReadCount  SpanningFragCount  SpliceType           LeftGene                        LeftBreakpoint    RightGene                        RightBreakpoint   LargeAnchorSupport  LeftBreakDinuc  LeftBreakEntropy  RightBreakDinuc  RightBreakEntropy  J_FFPM     S_FFPM
-THRA--AC090627.1             27                 93                 ONLY_REF_SPLICE      THRA^ENSG00000126351.8          chr17:38243106:+  AC090627.1^ENSG00000235300.3     chr17:46371709:+  YES_LDAS            GT              1.8892            AG               1.9656             5372.0653  18503.7803
-THRA--AC090627.1             5                  93                 ONLY_REF_SPLICE      THRA^ENSG00000126351.8          chr17:38243106:+  AC090627.1^ENSG00000235300.3     chr17:46384693:+  YES_LDAS            GT              1.8892            AG               1.4295             994.8269   18503.7803
-ACACA--STAC2                 12                 51                 ONLY_REF_SPLICE      ACACA^ENSG00000132142.15        chr17:35479453:-  STAC2^ENSG00000141750.6          chr17:37374426:-  YES_LDAS            GT              1.9656            AG               1.9656             2387.5846  10147.2344
-RPS6KB1--SNF8                10                 43                 ONLY_REF_SPLICE      RPS6KB1^ENSG00000108443.9       chr17:57970686:+  SNF8^ENSG00000159210.5           chr17:47021337:-  YES_LDAS            GT              1.3753            AG               1.8323             1989.6538  8555.5113
-TOB1--SYNRG                  8                  30                 ONLY_REF_SPLICE      TOB1^ENSG00000141232.4          chr17:48943419:-  SYNRG^ENSG00000006114.11         chr17:35880751:-  YES_LDAS            GT              1.4566            AG               1.8892             1591.7230  5968.9614
-VAPB--IKZF3                  4                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37934020:-  YES_LDAS            GT              1.9656            AG               1.7819             795.8615   9152.4075
-ZMYND8--CEP250               2                  44                 ONLY_REF_SPLICE      ZMYND8^ENSG00000101040.15       chr20:45852970:-  CEP250^ENSG00000126001.11        chr20:34078463:+  NO_LDAS             GT              1.8295            AG               1.8062             397.9308   8754.4767
-AHCTF1--NAAA                 3                  38                 ONLY_REF_SPLICE      AHCTF1^ENSG00000153207.10       chr1:247094880:-  NAAA^ENSG00000138744.10          chr4:76846964:-   YES_LDAS            GT              1.7232            AG               1.8062             596.8961   7560.6844
-VAPB--IKZF3                  1                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37944627:-  NO_LDAS             GT              1.9656            AG               1.8892             198.9654   9152.4075
-VAPB--IKZF3                  1                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37922746:-  NO_LDAS             GT              1.9656            AG               1.9329             198.9654   9152.4075
-STX16--RAE1                  4                  33                 ONLY_REF_SPLICE      STX16^ENSG00000124222.17        chr20:57227143:+  RAE1^ENSG00000101146.8           chr20:55929088:+  YES_LDAS            GT              1.9899            AG               1.9656             795.8615   6565.8575
+#FusionName     JunctionReadCount       SpanningFragCount       SpliceType      LeftGene        LeftBreakpoint  RightGene
+       RightBreakpoint LargeAnchorSupport      LeftBreakDinuc  LeftBreakEntropy        RightBreakDinuc RightBreakEntropy
+       FFPM
+THRA--THRA1/BTR 27      93      ONLY_REF_SPLICE THRA^ENSG00000126351.12 chr17:40086853:+        THRA1/BTR^ENSG00000235300.4     chr17:48294347:+        YES_LDAS        GT      1.8892  AG      1.9656  23875.8456
+THRA--THRA1/BTR 5       93      ONLY_REF_SPLICE THRA^ENSG00000126351.12 chr17:40086853:+        THRA1/BTR^ENSG00000235300.4     chr17:48307331:+        YES_LDAS        GT      1.8892  AG      1.4295  19498.6072
+ACACA--STAC2    12      52      ONLY_REF_SPLICE ACACA^ENSG00000278540.4 chr17:37122531:-        STAC2^ENSG00000141750.6 chr17:39218173:-        YES_LDAS        GT      1.9656  AG      1.9656  12733.7844
+RPS6KB1--SNF8   10      43      ONLY_REF_SPLICE RPS6KB1^ENSG00000108443.13      chr17:59893325:+        SNF8^ENSG00000159210.9  chr17:48943975:-        YES_LDAS        GT      1.3753  AG      1.8323  10545.1651
+TOB1--SYNRG     8       30      ONLY_REF_SPLICE TOB1^ENSG00000141232.4  chr17:50866058:-        SYNRG^ENSG00000275066.4 chr17:37520648:-        YES_LDAS        GT      1.4566  AG      1.8892  7560.6844
+VAPB--IKZF3     4       46      ONLY_REF_SPLICE VAPB^ENSG00000124164.15 chr20:58389517:+        IKZF3^ENSG00000161405.16
+        chr17:39777767:-        YES_LDAS        GT      1.9656  AG      1.7819  9948.269
+ZMYND8--CEP250  2       44      ONLY_REF_SPLICE ZMYND8^ENSG00000101040.19       chr20:47224317:-        CEP250^ENSG00000126001.15       chr20:35490637:+        NO_LDAS GT      1.8295  AG      1.8062  9152.4075
+
 ```
 
 The JunctionReads column indicates the number of RNA-Seq fragments containing a read that aligns as a split read at the site of the putative fusion junction.   
@@ -183,6 +183,18 @@ In the included testing/ directory, you'll find a small sample of fastq reads fr
 ## Further Inspection, Visualization, and Validation?
 
 We have a companion tool called FusionInspector <https://github.com/FusionInspector/FusionInspector/wiki> that provides a more in-depth view of the evidence supporting the predicted fusions.  FusionInspector can also run [Trinity](http://trinityrnaseq.github.io) to de novo reconstruct your predicted fusion transcripts based on the identified fusion-supporting RNA-Seq reads.
+
+As of STAR-Fusion v1.1.0, FusionInspector is integrated into STAR-Fusion as a submodule.  
+
+FusionInspector can be run in either 'inspect' or 'validate' mode when executed downstream from STAR-Fusion:
+
+*  '--FusionInspector inspect': only the reads identified by STAR-Fusion as evidence supporting the fusion prediction are aligned directly to a target set of fusion-gene contigs for exploration using IGV.
+
+*  '--FusionInspector validate': involves a more rigorous process of reevaluating the entire set of input reads, aligning the reads to a combination of the reference genome and a set of fusion-gene contigs based on the STAR-Fusion predictions. Reads mapping better to the fusion-gene contigs than the reference genome are identified and reported, fusions are re-scored/quantified, and fusion transcript allelic fractions are computed.
+
+
+
+
 
 ## Want to use Docker?
 
