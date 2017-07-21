@@ -287,26 +287,31 @@ If you have docker installed, you can pull the image like so:
 
     docker pull trinityctat/ctatfusion
 
-STAR-Fusion could be run like so via Docker:
+STAR-Fusion could be run like so via Docker, for example, running within the '${STAR_FUSION_HOME}/Docker' folder, where ${STAR_FUSION_HOME} is your base installation directory for the STAR-Fusion software.
 
-    docker run -v `pwd`/../:/data --rm trinityctat/ctatfusion \
-          /usr/local/src/STAR-Fusion-v1.0.0/STAR-Fusion \
-          --left_fq /data/testing/reads_1.fq.gz \
-          --right_fq /data/testing/reads_2.fq.gz \
-          --genome_lib_dir /data/GRCh37_gencode_v19_CTAT_lib_July272016_prebuilt \
-          -O /data/testing/test_docker_outdir/StarFusionOut
+    # setting some targets
+    VERSION=1.1.0
+    CTAT_GENOME_LIB="GRCh37_gencode_v19_CTAT_lib_July192017"
+    CTAT_GENOME_LIB_URL="https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/${CTAT_GENOME_LIB}.plug-n-play.tar.gz"
 
-and FusionInspector could be run like so, given the output from STAR-Fusion as run above:
+    # pulling down the plug-n-play version of the CTAT genome lib:
+    wget ${CTAT_GENOME_LIB_URL} -O ../${CTAT_GENOME_LIB}.tar.gz
 
-    docker run -v `pwd`/../:/data --rm trinityctat/ctatfusion \
-           /usr/local/src/FusionInspector-v1.0.1/FusionInspector \
-           --fusions /data/testing/test_docker_outdir/StarFusionOut/star-fusion.fusion_candidates.final.abridged.FFPM \
-           --left_fq /data/testing/reads_1.fq.gz \
-           --right_fq /data/testing/reads_2.fq.gz \
-           --genome_lib /data/GRCh37_gencode_v19_CTAT_lib_July272016_prebuilt \
-           --out_prefix finspector \
-           --out_dir /data/testing/test_docker_outdir/FusionInspectorOut \
-           --include_Trinity
+    # unpacking it
+    tar xvf "../${CTAT_GENOME_LIB}.tar.gz -C ../.
+
+    # and now running STAR-Fusion & FusionInspector 'inspect' & Trinity de-novo reconstruction via Docker:
+    docker run -v `pwd`/../:/data --rm trinityctat/ctatfusion:${VERSION} \
+        /usr/local/src/STAR-Fusion_v${VERSION}/STAR-Fusion \
+        --left_fq /data/testing/reads_1.fq.gz \
+        --right_fq /data/testing/reads_2.fq.gz \
+        --genome_lib_dir /data/${CTAT_GENOME_LIB}/ctat_genome_lib_build_dir \
+        -O /data/testing/test_docker_outdir/StarFusionOut \
+        --FusionInspector inspect \
+        --annotate \
+        --examine_coding_effect \
+        --denovo_reconstruct
+
 
 <a name='ContactUs'></a>
 ## Contact Us
