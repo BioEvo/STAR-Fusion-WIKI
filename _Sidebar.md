@@ -8,6 +8,7 @@
 * [Inspection and Validation](Home#InspectionValidation)
 * [Fusion Annotation](Home#FusionAnnotation)
 * [Examine Fusion Effect on Coding Regions](Home#ExamineCodingEffect)
+* [De novo reconstruct fusion transcripts](Home#TrinityReconstruct)
 * [Example data and execution](Home#ExampleData) 
 * [Run using Docker](Home#Docker)
 * [Contact us](Home#ContactUs)
