@@ -278,7 +278,7 @@ In the included testing/ directory, you'll find a small sample of fastq reads fr
                    --verbose_level 2  
 
 
-<a name='Docker'>
+<a name='Docker'></a>
 ## Want to use Docker?
 
 We provide a Docker image that contains all software pre-installed for running STAR, STAR-Fusion, and FusionInspector, and it's available here: https://hub.docker.com/r/trinityctat/ctatfusion/
