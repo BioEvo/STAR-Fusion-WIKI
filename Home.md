@@ -170,9 +170,9 @@ If there are alternatively spliced isoforms for fusion transcripts, the same fus
 <a name='InspectionValidation'></a>
 ## Further Inspection, Visualization, and Validation?
 
-We have a companion tool called FusionInspector <https://github.com/FusionInspector/FusionInspector/wiki> that provides a more in-depth view of the evidence supporting the predicted fusions.  FusionInspector can also run [Trinity](http://trinityrnaseq.github.io) to de novo reconstruct your predicted fusion transcripts based on the identified fusion-supporting RNA-Seq reads.
+We have a companion tool called [FusionInspector](<https://github.com/FusionInspector/FusionInspector/wiki>) that provides a more in-depth view of the evidence supporting the predicted fusions.  FusionInspector can also run [Trinity](http://trinityrnaseq.github.io) to de novo reconstruct your predicted fusion transcripts based on the identified fusion-supporting RNA-Seq reads.
 
-As of STAR-Fusion v1.1.0, FusionInspector is integrated into STAR-Fusion as a submodule.  
+>As of STAR-Fusion v1.1.0, FusionInspector is integrated into STAR-Fusion as a submodule.  
 
 FusionInspector can be run in either 'inspect' or 'validate' mode when executed downstream from STAR-Fusion:
 
