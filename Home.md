@@ -168,17 +168,6 @@ The .final.abridged.FFPM output file contents are shown above. See the unabridge
 If there are alternatively spliced isoforms for fusion transcripts, the same fusion pair will be listed as multiple entries but with different breakpoints identified.
 
 
-## Example data and execution:
-
-In the included testing/ directory, you'll find a small sample of fastq reads from a tumor sample.  Find fusions using the resource set like so:
-
-    cd testing/
-     
-    ../STAR-Fusion --left_fq reads_1.fq.gz --right_fq reads_2.fq.gz \
-                   -O star_fusion_outdir \
-                   --genome_lib_dir  /path/to/your/CTAT_resource_lib \
-                   --verbose_level 2  
-
 
 ## Further Inspection, Visualization, and Validation?
 
@@ -193,6 +182,20 @@ FusionInspector can be run in either 'inspect' or 'validate' mode when executed 
 *  '--FusionInspector validate': involves a more rigorous process of reevaluating the entire set of input reads, aligning the reads to a combination of the reference genome and a set of fusion-gene contigs based on the STAR-Fusion predictions. Reads mapping better to the fusion-gene contigs than the reference genome are identified and reported, fusions are re-scored/quantified, and fusion transcript allelic fractions are computed.
 
 If either mode is invoked, STAR-Fusion will run FusionInspector and create a FusionInspector/ output subdirectory containing all relevant output files.  See the [FusionInspector Wiki]( <https://github.com/FusionInspector/FusionInspector/wiki>) for documentation on output files and loading results into IGV for visualization. 
+
+
+
+## Example data and execution:
+
+In the included testing/ directory, you'll find a small sample of fastq reads from a tumor sample.  Find fusions using the resource set like so:
+
+    cd testing/
+     
+    ../STAR-Fusion --left_fq reads_1.fq.gz --right_fq reads_2.fq.gz \
+                   -O star_fusion_outdir \
+                   --genome_lib_dir  /path/to/your/CTAT_resource_lib \
+                   --verbose_level 2  
+
 
 
 ## Want to use Docker?
