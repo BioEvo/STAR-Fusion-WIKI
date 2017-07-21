@@ -224,7 +224,7 @@ and FusionInspector could be run like so, given the output from STAR-Fusion as r
            --out_dir /data/testing/test_docker_outdir/FusionInspectorOut \
            --include_Trinity
 
-
+<a name='ContactUs'></a>
 ## Contact Us
 
 Questions, comments, etc?
