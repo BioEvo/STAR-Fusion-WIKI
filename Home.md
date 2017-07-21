@@ -38,8 +38,9 @@ Please consider using a proper 'FULL' release version as described above.
        perl -MCPAN -e shell
        install DB_File
        install URI::Escape
- 	
->The required non-standard Perl module Set::IntervalTree now comes included with the STAR-Fusion utility. 
+       install Set::IntervalTree
+       install Carp::Assert
+       install JSON::XS
 
 
 ## Computing / Hardware requirements
