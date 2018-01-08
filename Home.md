@@ -70,7 +70,7 @@ Otherwise, if you downloaded the small (~2G) unprocessed resource lib, then you'
      %  $STAR_FUSION_HOME/FusionFilter/prep_genome_lib.pl \
                              --genome_fa ref_genome.fa \
                              --gtf ref_annot.gtf \
-                             --blast_pairs blast_pairs.outfmt6.gz \
+                             --blast_pairs blast_pairs.gene_syms.outfmt6.gz \
                              --fusion_annot_lib fusion_lib.dat.gz
 
     %  $STAR_FUSION_HOME/FusionFilter/util/index_pfam_domain_info.pl  \
