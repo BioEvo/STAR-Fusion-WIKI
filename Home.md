@@ -41,6 +41,7 @@ Please consider using a proper 'FULL' release version as described above.
        install Set::IntervalTree
        install Carp::Assert
        install JSON::XS
+       install PerlIO::gzip
 
 <a name='ComputeRequirements'></a>
 ## Computing / Hardware requirements
