@@ -120,7 +120,7 @@ Parameters that we recommend for running STAR as part of STAR-Fusion are as foll
           --alignSJDBoverhangMin 10 \                                                                                              
           --alignMatesGapMax 100000 \                                                                                             
           --alignIntronMax 100000 \                                                                                                
-          --chimSegmentReadGapMax parameter 3 \                                                                                    
+          --chimSegmentReadGapMax 3 \                                                                                    
           --alignSJstitchMismatchNmax 5 -1 5 5 \
           --runThreadN ${THREAD_COUNT} \                                                                                                           
           --limitBAMsortRAM 31532137230 \                                                                                           
