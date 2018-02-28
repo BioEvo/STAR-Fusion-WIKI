@@ -51,7 +51,7 @@ If you're planning to run STAR to align reads to the human genome, then you'll n
 
 ### Data Resources Required:
 
-A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide several alternative resources for human fusion transcript detection depending on whether you want to use GRCh37 or GRCh38 reference human genomes and corresponding Gencode annotation sets.  Options are available here: <https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/>, so choose one, and below we refer to it as 'CTAT_resource_lib.tar.gz'.   The gene annotations in each case are restricted to the protein-coding and lincRNA transcripts.
+A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide several alternative resources for human fusion transcript detection depending on whether you want to use GRCh37 or GRCh38 reference human genomes and corresponding [Gencode](https://www.gencodegenes.org/) annotation sets.  Options are available here: <https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/>, so choose one, and below we refer to it as 'CTAT_resource_lib.tar.gz'.  The 'plug-n-play' libs are that... just download, unpack it (tar -zxvf filename.tar.gz)   
 
 
 If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.  FusionFilter comes included in the STAR-Fusion software.
@@ -70,19 +70,13 @@ Otherwise, if you downloaded the small (~2G) unprocessed resource lib, then you'
      %  $STAR_FUSION_HOME/FusionFilter/prep_genome_lib.pl \
                              --genome_fa ref_genome.fa \
                              --gtf ref_annot.gtf \
-                             --blast_pairs blast_pairs.gene_syms.outfmt6.gz \
-                             --fusion_annot_lib fusion_lib.dat.gz
-
-    %  $STAR_FUSION_HOME/FusionFilter/util/index_pfam_domain_info.pl  \
-            --pfam_domains PFAM.domtblout.dat.gz \
-            --genome_lib_dir ctat_genome_lib_build_dir
-
+                             --fusion_annot_lib CTAT_HumanFusionLib.dat.gz \
+                             --annot_filter_rule AnnotFilterRule.pm \
+                             --pfam_db PFAM.domtblout.dat.gz
 
 Once the build process completes successfully, you can then refer to the above like so with STAR-Fusion:
 
        STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib   ...
-
-       # full usage info provided below.
 
 
 <a name='RunnningStarF'></a>
@@ -102,7 +96,10 @@ If you have single-end FASTQ files, just use the --left_fq parameter:
                  --left_fq reads_1.fq \ 
                  --output_dir star_fusion_outdir
 
+>If you set the environmental variable 'CTAT_GENOME_LIB' to the '/path/to/your/ctat_genome_lib_build_dir' resulting from the above build process or from the plug-n-play installation, then you won't need to specify --genome_lib_dir as a STAR-Fusion parameter.
+
 >Note, unless you have relatively long single-end reads (ex. at least 100 base length), you will be underpowered for detecting fusion transcripts.
+
 
 <a name='KickstartMode'></a>
 ## Alternatively, Kickstart mode: running STAR yourself, and then running STAR-Fusion using the existing outputs
@@ -123,8 +120,8 @@ Parameters that we recommend for running STAR as part of STAR-Fusion are as foll
           --chimSegmentReadGapMax 3 \                                                                                    
           --alignSJstitchMismatchNmax 5 -1 5 5 \
           --runThreadN ${THREAD_COUNT} \                                                                                                           
-          --limitBAMsortRAM 31532137230 \                                                                                           
-          --outSAMtype BAM SortedByCoordinate 
+          --outSAMstrandField intronMotif
+        
 
 This will (in part) generate a file called 'Chimeric.out.junction', which is used by STAR-Fusion like so:
 
@@ -137,17 +134,34 @@ This will (in part) generate a file called 'Chimeric.out.junction', which is use
 <a name='Outputs'></a>
 ## Output from STAR-Fusion
 
-The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_predictions.tsv', along with an abridged version that excludes the identification of the evidence fusion reads and called 'star-fusion.fusion_predictions.tsv', with the following format:
+The output from STAR-Fusion is found as a tab-delimited file named 'star-fusion.fusion_predictions.tsv', along with an abridged version that excludes the identification of the evidence fusion reads and called 'star-fusion.fusion_predictions.abridged.tsv', with the following format:
 
 ```
-#FusionName     JunctionReadCount       SpanningFragCount       SpliceType      LeftGene        LeftBreakpoint  RightGene       RightBreakpoint LargeAnchorSupport      LeftBreakDinuc  LeftBreakEntropy        RightBreakDinuc RightBreakEntropy       FFPM
-THRA--THRA1/BTR 27      93      ONLY_REF_SPLICE THRA^ENSG00000126351.12 chr17:40086853:+        THRA1/BTR^ENSG00000235300.4     chr17:48294347:+        YES_LDAS        GT      1.8892  AG      1.9656  23875.8456
-THRA--THRA1/BTR 5       93      ONLY_REF_SPLICE THRA^ENSG00000126351.12 chr17:40086853:+        THRA1/BTR^ENSG00000235300.4     chr17:48307331:+        YES_LDAS        GT      1.8892  AG      1.4295  19498.6072
-ACACA--STAC2    12      52      ONLY_REF_SPLICE ACACA^ENSG00000278540.4 chr17:37122531:-        STAC2^ENSG00000141750.6 chr17:39218173:-        YES_LDAS        GT      1.9656  AG      1.9656  12733.7844
-RPS6KB1--SNF8   10      43      ONLY_REF_SPLICE RPS6KB1^ENSG00000108443.13      chr17:59893325:+        SNF8^ENSG00000159210.9  chr17:48943975:-        YES_LDAS        GT      1.3753  AG      1.8323  10545.1651
-TOB1--SYNRG     8       30      ONLY_REF_SPLICE TOB1^ENSG00000141232.4  chr17:50866058:-        SYNRG^ENSG00000275066.4 chr17:37520648:-        YES_LDAS        GT      1.4566  AG      1.8892  7560.6844
-VAPB--IKZF3     4       46      ONLY_REF_SPLICE VAPB^ENSG00000124164.15 chr20:58389517:+        IKZF3^ENSG00000161405.16        chr17:39777767:-        YES_LDAS        GT      1.9656  AG      1.7819  9948.269
-ZMYND8--CEP250  2       44      ONLY_REF_SPLICE ZMYND8^ENSG00000101040.19       chr20:47224317:-        CEP250^ENSG00000126001.15       chr20:35490637:+        NO_LDAS GT      1.8295  AG      1.8062  9152.4075
+#FusionName           JunctionReadCount  SpanningFragCount  SpliceType           LeftGene                        LeftBreakpoint    RightGene                        RightBreakpoint   LargeAnchorSupport  FFPM        LeftBreakDinuc  LeftBreakEntropy  RightBreakDinuc  RightBreakEntropy  annots
+THRA--AC090627.1      27                 93                 ONLY_REF_SPLICE      THRA^ENSG00000126351.8          chr17:38243106:+  AC090627.1^ENSG00000235300.3     chr17:46371709:+  YES_LDAS            23875.8456  GT              1.8892            AG               1.9656             ["CCLE","FA_CancerSupp","INTRACHROMOSOMAL[chr17:8.12Mb]"]
+THRA--AC090627.1      5                  93                 ONLY_REF_SPLICE      THRA^ENSG00000126351.8          chr17:38243106:+  AC090627.1^ENSG00000235300.3     chr17:46384693:+  YES_LDAS            19498.6072  GT              1.8892            AG               1.4295             ["CCLE","FA_CancerSupp","INTRACHROMOSOMAL[chr17:8.12Mb]"]
+ACACA--STAC2          12                 52                 ONLY_REF_SPLICE      ACACA^ENSG00000132142.15        chr17:35479453:-  STAC2^ENSG00000141750.6          chr17:37374426:-  YES_LDAS            12733.7844  GT              1.9656            AG               1.9656             ["ChimerSeq","CCLE","Klijn_CellLines","FA_CancerSupp","INTRACHROMOSOMAL[chr17:1.60Mb]"]
+RPS6KB1--SNF8         10                 43                 ONLY_REF_SPLICE      RPS6KB1^ENSG00000108443.9       chr17:57970686:+  SNF8^ENSG00000159210.5           chr17:47021337:-  YES_LDAS            10545.1651  GT              1.3753            AG               1.8323             ["Klijn_CellLines","FA_CancerSupp","ChimerSeq","CCLE","INTRACHROMOSOMAL[chr17:10.95Mb]"]
+TOB1--SYNRG           8                  30                 ONLY_REF_SPLICE      TOB1^ENSG00000141232.4          chr17:48943419:-  SYNRG^ENSG00000006114.11         chr17:35880751:-  YES_LDAS            7560.6844   GT              1.4566            AG               1.8892             ["FA_CancerSupp","CCLE","INTRACHROMOSOMAL[chr17:12.97Mb]"]
+VAPB--IKZF3           4                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37934020:-  YES_LDAS            9948.269    GT              1.9656            AG               1.7819             ["FA_CancerSupp","Klijn_CellLines","CCLE","ChimerSeq","ChimerPub","INTERCHROMOSOMAL[chr20--chr17]"]
+ZMYND8--CEP250        2                  44                 ONLY_REF_SPLICE      ZMYND8^ENSG00000101040.15       chr20:45852970:-  CEP250^ENSG00000126001.11        chr20:34078463:+  NO_LDAS             9152.4075   GT              1.8295            AG               1.8062             ["FA_CancerSupp","CCLE","ChimerSeq","INTRACHROMOSOMAL[chr20:11.74Mb]"]
+AHCTF1--NAAA          3                  38                 ONLY_REF_SPLICE      AHCTF1^ENSG00000153207.10       chr1:247094880:-  NAAA^ENSG00000138744.10          chr4:76846964:-   YES_LDAS            8157.5805   GT              1.7232            AG               1.8062             ["FA_CancerSupp","CCLE","INTERCHROMOSOMAL[chr1--chr4]"]
+VAPB--IKZF3           1                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37922746:-  NO_LDAS             9351.3729   GT              1.9656            AG               1.9329             ["FA_CancerSupp","Klijn_CellLines","CCLE","ChimerSeq","ChimerPub","INTERCHROMOSOMAL[chr20--chr17]"]
+VAPB--IKZF3           1                  46                 ONLY_REF_SPLICE      VAPB^ENSG00000124164.11         chr20:56964573:+  IKZF3^ENSG00000161405.12         chr17:37944627:-  NO_LDAS             9351.3729   GT              1.9656            AG               1.8892             ["FA_CancerSupp","Klijn_CellLines","CCLE","ChimerSeq","ChimerPub","INTERCHROMOSOMAL[chr20--chr17]"]
+STX16--RAE1           4                  33                 ONLY_REF_SPLICE      STX16^ENSG00000124222.17        chr20:57227143:+  RAE1^ENSG00000101146.8           chr20:55929088:+  YES_LDAS            7361.719    GT              1.9899            AG               1.9656             ["FA_CancerSupp","CCLE","INTRACHROMOSOMAL[chr20:1.27Mb]"]
+AHCTF1--NAAA          1                  38                 ONLY_REF_SPLICE      AHCTF1^ENSG00000153207.10       chr1:247094431:-  NAAA^ENSG00000138744.10          chr4:76846964:-   NO_LDAS             7759.6498   GT              1.9086            AG               1.8062             ["FA_CancerSupp","CCLE","INTERCHROMOSOMAL[chr1--chr4]"]
+STX16-NPEPL1--RAE1    4                  24                 INCL_NON_REF_SPLICE  STX16-NPEPL1^ENSG00000254995.4  chr20:57227143:+  RAE1^ENSG00000101146.8           chr20:55929088:+  YES_LDAS            5571.0306   GT              1.9899            AG               1.9656             INTRACHROMOSOMAL[chr20:1.27Mb]
+RAB22A--MYO9B         6                  11                 ONLY_REF_SPLICE      RAB22A^ENSG00000124209.3        chr20:56886178:+  MYO9B^ENSG00000099331.9          chr19:17256207:+  YES_LDAS            3382.4115   GT              1.6895            AG               1.9656             ["FA_CancerSupp","ChimerSeq","CCLE","INTERCHROMOSOMAL[chr20--chr19]"]
+MED1--ACSF2           4                  11                 ONLY_REF_SPLICE      MED1^ENSG00000125686.7          chr17:37595418:-  ACSF2^ENSG00000167107.8          chr17:48548389:+  YES_LDAS            2984.4807   GT              1.9656            AG               1.9656             ["FA_CancerSupp","CCLE","INTRACHROMOSOMAL[chr17:10.90Mb]"]
+MED13--BCAS3          2                  12                 ONLY_REF_SPLICE      MED13^ENSG00000108510.5         chr17:60129898:-  BCAS3^ENSG00000141376.16         chr17:59469338:+  YES_LDAS            2785.5154   GT              1.5546            AG               1.9086             ["FA_CancerSupp","CCLE","INTRACHROMOSOMAL[chr17:0.55Mb]"]
+MED1--STXBP4          1                  15                 ONLY_REF_SPLICE      MED1^ENSG00000125686.7          chr17:37607291:-  STXBP4^ENSG00000166263.9         chr17:53218671:+  NO_LDAS             3183.4461   GT              1.3996            AG               1.7968             ["CCLE","FA_CancerSupp","Klijn_CellLines","INTRACHROMOSOMAL[chr17:15.44Mb]"]
+MED13--BCAS3          1                  12                 ONLY_REF_SPLICE      MED13^ENSG00000108510.5         chr17:60129898:-  BCAS3^ENSG00000141376.16         chr17:59465979:+  NO_LDAS             2586.55     GT              1.5546            AG               0.8366             ["FA_CancerSupp","CCLE","INTRACHROMOSOMAL[chr17:0.55Mb]"]
+STARD3--DOK5          2                  7                  ONLY_REF_SPLICE      STARD3^ENSG00000131748.11       chr17:37793484:+  DOK5^ENSG00000101134.7           chr20:53259997:+  NO_LDAS             1790.6885   GT              1.8892            AG               1.9656             ["FA_CancerSupp","CCLE","INTERCHROMOSOMAL[chr17--chr20]"]
+DIDO1--TTI1           1                  10                 ONLY_REF_SPLICE      DIDO1^ENSG00000101191.12        chr20:61569148:-  TTI1^ENSG00000101407.8           chr20:36642259:-  NO_LDAS             2188.6192   GT              1.6402            AG               1.9329             ["FA_CancerSupp","ChimerSeq","CCLE","INTRACHROMOSOMAL[chr20:24.85Mb]"]
+DIDO1--TTI1           1                  10                 ONLY_REF_SPLICE      DIDO1^ENSG00000101191.12        chr20:61569148:-  TTI1^ENSG00000101407.8           chr20:36634799:-  NO_LDAS             2188.6192   GT              1.6402            AG               1.8892             ["FA_CancerSupp","ChimerSeq","CCLE","INTRACHROMOSOMAL[chr20:24.85Mb]"]
+BRD4--RFX1            1                  8                  ONLY_REF_SPLICE      BRD4^ENSG00000141867.13         chr19:15443101:-  RFX1^ENSG00000132005.4           chr19:14109129:-  NO_LDAS             1790.6884   GT              1.9086            AG               1.8892             ["CCLE","FA_CancerSupp","INTRACHROMOSOMAL[chr19:1.23Mb]"]
+BRD4--RFX1            1                  8                  ONLY_REF_SPLICE      BRD4^ENSG00000141867.13         chr19:15443101:-  RFX1^ENSG00000132005.4           chr19:14094407:-  NO_LDAS             1790.6884   GT              1.9086            AG               1.8295             ["CCLE","FA_CancerSupp","INTRACHROMOSOMAL[chr19:1.23Mb]"]
+TRPC4AP--MRPL45       1                  8                  ONLY_REF_SPLICE      TRPC4AP^ENSG00000100991.7       chr20:33665849:-  MRPL45^ENSG00000174100.5         chr17:36478009:+  NO_LDAS             1790.6884   GT              1.6895            AG               1.9086             ["CCLE","Klijn_CellLines","FA_CancerSupp","INTERCHROMOSOMAL[chr20--chr17]"]
 
 ```
 
