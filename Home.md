@@ -177,7 +177,9 @@ The 'LargeAnchorSupport' column indicates whether there are split reads that pro
 
 'SpliceType' indicates whether the proposed breakpoint occurs at reference exon junctions as provided by the reference transcript structure annotations (ex. gencode).
 
-The .final.abridged.FFPM output file contents are shown above. See the unabridged '.final' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments.
+The abridged output file contents are shown above. See the unabridged 'star-fusion.fusion_predictions.tsv' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments, where the individual read names are provided as comma-delimited lists in each corresponding column.
+
+The final column 'annots' provides a simplified annotation for fusion transcript, leveraging [FusionAnnotator](https://github.com/FusionAnnotator/FusionAnnotator/wiki) (bundled with STAR-Fusion).  For the human source or plug-n-play genome libs, the fusion annotation info is based on [CTAT_HumanFusionLib](https://github.com/FusionAnnotator/CTAT_HumanFusionLib), which includes many popular resources for annotating fusions known to be relevant to cancer, as well as fusions thought to be [red herrings](https://en.wikipedia.org/wiki/Red_herring) that will be automatically filtered from the final output.  To exclude any annotation-based filtering, use the 'STAR-Fusion --no_annotation_filter' parameter. 
 
 If there are alternatively spliced isoforms for fusion transcripts, the same fusion pair will be listed as multiple entries but with different breakpoints identified.
 
