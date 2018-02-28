@@ -224,8 +224,9 @@ The coding effect results are appended as additional columns in the STAR-Fusion 
 >Note, fusion annotation and examination of coding effects are additionally performed on FusionInspector outputs if '--FusionInspector inspect|validate' is invoked in your STAR-Fusion run.
 
 
-<a name='TrinityReconstruct'>
-##  De novo reconstruct fusion transcripts using Trinity
+
+<a name='TrinityReconstruct'></a>
+## De novo reconstruct fusion transcripts using Trinity
 
 The reconstructed transcripts described above by the 'fusion coding effect' module are based on the reference annotations and the reference genome sequence.  If you're interested in doing de novo reconstruction of fusion transcripts based on the actual fusion-supporting RNA-Seq reads, capturing any additional variant information or novel sequence features that may be evidence among the reads, you can include de novo reconstruction by invoking the STAR-Fusion '--denovo_reconstruct' parameter.  This requires that you include the  '--FusionInspector inspect|validate' setting.  Based on the STAR-Fusion predicted fusions.  
 
