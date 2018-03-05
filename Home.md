@@ -294,5 +294,5 @@ Visit our STAR-fusion Google group <https://groups.google.com/forum/#!forum/star
 
 This effort was largely inspired by earlier work done by Nicolas Stransky in the landmark publication "The landscape of kinase fusions in cancer" by [Stransky et al., Nat Commun 2014](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4175590/), in addition to very nice work done by Daniel Nicorici with his [FusionCatcher software](http://biorxiv.org/content/early/2014/11/19/011650).
 
-STAR-Fusion is contributed by Brian Haas (@Broad Institute), in collaboration with Alex Dobin (@CSHL).
+STAR-Fusion is contributed by [Brian Haas (Broad Institute)](https://personal.broadinstitute.org/bhaas/), in collaboration with [Alex Dobin (Cold Spring Harbor Laboratory)](https://www.researchgate.net/profile/Alexander_Dobin).  STAR-Fusion is several components being developed as part of the [Trinity Cancer Transcriptomics Toolkit](https://github.com/NCIP/Trinity_CTAT/wiki).
 
