@@ -53,7 +53,7 @@ If you're planning to run STAR to align reads to the human genome, then you'll n
 When the '--FusionInspector validate' mode is used, memory requirements can increase to 40G or 50G.  If '--FusionInspector inspect' mode is used, additional RAM should generally not be required.
  
 
-## Execution times
+### Execution times
 
 Execution times are largely determined by how long it takes for STAR to align reads. The fusion-finding component generally takes minutes on large samples.  If '--FusionInspector validate' mode is used, then roughly double the total execution time, as STAR is needed to perform an additional full alignment of the reads in FusionInspector mode.
 
