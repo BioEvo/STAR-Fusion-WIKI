@@ -11,4 +11,5 @@
 * [De novo reconstruct fusion transcripts](Home#TrinityReconstruct)
 * [Example data and execution](Home#ExampleData) 
 * [Run using Docker](Home#Docker)
+* [FAQ](STAR-Fusion-FAQ)
 * [Contact us](Home#ContactUs)
