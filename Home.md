@@ -30,6 +30,7 @@ Please consider using a proper 'FULL' release version as described above.
 ### Tools Required:
 
 *  STAR <https://github.com/alexdobin/STAR>
+*  samtools <http://www.htslib.org/download/>
 *  possibly some non-standard Perl modules - see below:
   
 .
