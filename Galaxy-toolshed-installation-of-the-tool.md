@@ -1,12 +1,10 @@
 1. Git clone Galaxy by following instructions [here](https://galaxyproject.org/admin/get-galaxy/).
 2. cd </path/to/galaxy>
-2. Configure Galaxy (config/galaxy.yml) with settings below:
+3. Configure Galaxy (config/galaxy.yml) with settings below:
    1. admin_users: <your_email_id>
    2. conda_prefix: </valid/path/>
    3. conda_auto_install: true
    4. conda_auto_init: true
-3. Configure Galaxy (config/tool_sheds_conf.xml.sample) to uncomment the line below:
-   <tool_shed name="Galaxy Test Tool Shed" url="https://testtoolshed.g2.bx.psu.edu/"/>
 4. Run Galaxy:
     `sh run.sh`
 5. Register and login with your admin email id used in config/galaxy.yml as below:
