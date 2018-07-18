@@ -9,7 +9,7 @@
     `sh run.sh`
 5. Register and login with your admin email id used in config/galaxy.yml as below:
 6. Go to the Admin tab on the top panel
-7. Select Install new tools and select Galaxy Test Tool Shed
+7. Select Install new tools and select Galaxy Tool Shed
 8. Search for star-fusion and install it
 9. Similarly install ctat_genome_lib_data_manager
 10. Next download to ctat_genome_lib_data_manager on your server/machine, click on Local Data (under Admin Tab). Under Data Manager Tools select ctat_genome_lib_data_manager and fill the form as below (this may take a while):
