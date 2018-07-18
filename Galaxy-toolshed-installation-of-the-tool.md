@@ -1,7 +1,7 @@
 1. Git clone Galaxy by following instructions [here](https://galaxyproject.org/admin/get-galaxy/).
 2. cd </path/to/galaxy>
 2. Configure Galaxy (config/galaxy.yml) with settings below:
-   1. admin_users: <your email_id>
+   1. admin_users: <your_email_id>
    2. conda_prefix: </valid/path/>
    3. conda_auto_install: true
    4. conda_auto_init: true
