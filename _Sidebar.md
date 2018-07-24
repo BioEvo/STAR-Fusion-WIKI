@@ -1,6 +1,5 @@
 * [STAR-Fusion Wiki Home](Home)
 * [Installing STAR-Fusion](Home#Installation)
-* [Installing STAR-Fusion](Home#Installing from Galaxy toolshed)
 * [Computing/Hardware Requirements](Home#ComputeRequirements)
 * [Running STAR-Fusion](Home#RunnningStarF)
    * [Running from FASTQ files](Home#RunFromFastq)
