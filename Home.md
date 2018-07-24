@@ -28,7 +28,7 @@ Please consider using a proper 'FULL' release version as described above.
 
 ### Installing from Galaxy toolshed
 
-STAR-Fusion is also available for Galaxy toolshed download. An associated genome resource data manager will be required to run this too. Please find instructions [here.](https://github.com/STAR-Fusion/STAR-Fusion/wiki/Galaxy-toolshed-installation-of-the-tool).
+STAR-Fusion is also available for Galaxy toolshed download. An associated genome resource data manager will be required to run this too. Please find instructions [here.](https://github.com/STAR-Fusion/STAR-Fusion/wiki/Galaxy-toolshed-installation-of-the-tool)
 
 ### Bioconda install
 
