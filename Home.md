@@ -137,7 +137,8 @@ Parameters that we recommend for running STAR as part of STAR-Fusion are as foll
           --chimSegmentReadGapMax 3 \                                                                                    
           --alignSJstitchMismatchNmax 5 -1 5 5 \
           --runThreadN ${THREAD_COUNT} \                                                                                                           
-          --outSAMstrandField intronMotif
+          --outSAMstrandField intronMotif \
+          --chimOutJunctionFormat 1 # required as of STAR v2.6.1
         
 
 This will (in part) generate a file called 'Chimeric.out.junction', which is used by STAR-Fusion like so:
