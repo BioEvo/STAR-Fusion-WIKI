@@ -147,7 +147,7 @@ This will (in part) generate a file called 'Chimeric.out.junction', which is use
                  -J Chimeric.out.junction \
                  --output_dir star_fusion_outdir
 
->Note, include the --left_fq and --right_fq parameters along with the -J Chimeric.out.junction in order to compute the FFPM (normalized fusion fragments per million total rna-seq fragments) values in your summary report. Otherwise, you'll just get evidence fragment counts without the normalized values.
+>Note, if you use this -J Chimeric.out.junction file, it is essential that the new '--chimOutJunctionFormat 1' parameter was used, since this integrates alignment statistics at the end of the junction file, which are used for estimating the FFPM fusion ~expression estimates.
 
 <a name='Outputs'></a>
 ## Output from STAR-Fusion
