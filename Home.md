@@ -241,6 +241,10 @@ The coding effect results are appended as additional columns in the STAR-Fusion 
       PFAM_RIGHT         SH3_1-PARTIAL|~80-113|1.6e-15^SH3_9-PARTIAL|~80-117|1.3e-11^SH3_2-PARTIAL|~80-118|1.9e-10^SH3_3|82-116|9.2e-08^SH3_6|83-112|0.00021^SH2|127-202|1.4e-26^Pkinase_Tyr|242-492|3.3e-102^Pkinase|244-491|2.1e-51^Haspin_kinase|307-388|9.1e-07^F_actin_bind|1027-1130|2.2e-33
 
 
+The 'FusionModel' describes the gene structure of the reconstructed fusion transcript model given the breakpoint and preferentially selecting in-frame coding structures among multiple isoforms.  The format is "chr|strand|[exon_start_codon_phase]|lend-rend[exon_end_codon_phase]...<==> info for connecting partner in the same format".
+
+The PFAM information corresponds to the positions of the domains in the putative fusion protein, based on domain positions within the original protein annotations.  A  ~ symbol indicates that the breakpoint fractures the original domain annotation.
+
 >Note, fusion annotation and examination of coding effects are additionally performed on FusionInspector outputs if '--FusionInspector inspect|validate' is invoked in your STAR-Fusion run.
 
 
