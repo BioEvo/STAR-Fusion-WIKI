@@ -320,3 +320,12 @@ This effort was largely inspired by earlier work done by Nicolas Stransky in the
 
 STAR-Fusion is contributed by [Brian Haas (Broad Institute)](https://personal.broadinstitute.org/bhaas/), in collaboration with [Alex Dobin (Cold Spring Harbor Laboratory)](https://www.researchgate.net/profile/Alexander_Dobin).  STAR-Fusion is several components being developed as part of the [Trinity Cancer Transcriptomics Toolkit](https://github.com/NCIP/Trinity_CTAT/wiki).
 
+
+## Referencing STAR-Fusion
+
+STAR-Fusion should be cited as:
+```
+STAR-Fusion: Fast and Accurate Fusion Transcript Detection from RNA-Seq
+Brian Haas, Alexander Dobin, Nicolas Stransky, Bo Li, Xiao Yang, Timothy Tickle, Asma Bankapur, Carrie Ganote, Thomas Doak, Natalie Pochet, Jing Sun, Catherine Wu, Thomas Gingeras, Aviv Regev
+bioRxiv 120295; doi: https://doi.org/10.1101/120295
+```
