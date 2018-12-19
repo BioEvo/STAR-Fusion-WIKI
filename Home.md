@@ -195,6 +195,8 @@ The 'LargeAnchorSupport' column indicates whether there are split reads that pro
 
 'SpliceType' indicates whether the proposed breakpoint occurs at reference exon junctions as provided by the reference transcript structure annotations (ex. gencode).
 
+'LeftBreakEntropy' and 'RightBreakEntropy' represent the [Shannon entropy](http://bearcave.com/misl/misl_tech/wavelets/compression/shannon.html)  of the 15 exonic bases flanking the breakpoint. The maximum entropy is 2, representing highest complexity. The lowest would be zero (involving a 15 base mononucleotide run).  Low entropy sites should generally be treated as less confident breakpoints.
+
 The abridged output file contents are shown above. See the unabridged 'star-fusion.fusion_predictions.tsv' output file for the identity of the RNA-Seq fragments identified as junction or spanning fragments, where the individual read names are provided as comma-delimited lists in each corresponding column.
 
 <a name='FusionAnnotation'></a>
