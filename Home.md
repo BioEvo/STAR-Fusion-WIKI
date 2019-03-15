@@ -329,3 +329,6 @@ STAR-Fusion: Fast and Accurate Fusion Transcript Detection from RNA-Seq
 Brian Haas, Alexander Dobin, Nicolas Stransky, Bo Li, Xiao Yang, Timothy Tickle, Asma Bankapur, Carrie Ganote, Thomas Doak, Natalie Pochet, Jing Sun, Catherine Wu, Thomas Gingeras, Aviv Regev
 bioRxiv 120295; doi: https://doi.org/10.1101/120295
 ```
+
+## Funding
+STAR-Fusion is supported as part of the [Trinity CTAT Project](https://github.com/NCIP/Trinity_CTAT/wiki), funded by the [National Cancer Institute Informatics Technology for Cancer Research](https://itcr.cancer.gov/)
