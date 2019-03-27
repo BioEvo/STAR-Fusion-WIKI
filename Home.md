@@ -72,7 +72,7 @@ If you're looking to apply STAR-Fusion using a different target, you'll need to 
 
 If you downloaded the large (30G) 'plug-n-play' resource lib, then just untar/gz the archive and use it directly. 
 
-Otherwise, if you downloaded the small (~2G) unprocessed resource lib, then you'll need to prep it for use with STAR-fusion as follows: 
+**Otherwise**, if you downloaded the small (~2G) unprocessed resource lib, then you'll need to prep it for use with STAR-fusion as follows: 
 
      %  tar xvf CTAT_resource_lib.tar.gz
 
@@ -91,8 +91,16 @@ Once the build process completes successfully, you can then refer to the above l
 
 
 <a name='RunnningStarF'></a>
+
+## Running STAR-Fusion
+
+There are two ways to run STAR-Fusion. The typical case is that you're staring with FASTQ files. Alternatively, in the context of a more comprehensive transcriptome analysis pipeline leveraging STAR and the human genome from our CTAT genome lib, you may have a 'Chimeric.junction.out' file generated as one of the outputs from an earlier STAR alignment run.  If so, you can 'kickstart' STAR-Fusion by using just this 'Chimeric.junction.out' file.
+
+These execution modes are detailed below:
+
+
 <a name='RunFromFastq'></a>
-## Running STAR-Fusion starting with FASTQ files:
+### Running STAR-Fusion starting with FASTQ files (typical):
 
 Given paired-end of FASTQ files, run STAR-Fusion like so:
 
@@ -113,7 +121,7 @@ If you have single-end FASTQ files, just use the --left_fq parameter:
 
 
 <a name='KickstartMode'></a>
-## Alternatively, Kickstart mode: running STAR yourself, and then running STAR-Fusion using the existing outputs
+### Alternatively, Kickstart mode: running STAR yourself, and then running STAR-Fusion using the existing outputs
 
 It's not always the case that you want to have STAR-Fusion run STAR directly, as you may have already run STAR earlier on, or prefer to run STAR separately to use the outputs in other processes such as for expression estimates or variant detection.
 
