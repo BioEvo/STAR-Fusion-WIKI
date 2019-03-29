@@ -140,6 +140,14 @@ Parameters that we recommend for running STAR as part of STAR-Fusion are as foll
           --alignSJstitchMismatchNmax 5 -1 5 5 \
           --runThreadN ${THREAD_COUNT} \                                                                                                           
           --outSAMstrandField intronMotif \
+          --outSAMunmapped Within \
+          --outSAMtype BAM Unsorted \
+          --outSAMattrRGline ID:GRPundef \
+          --chimMultimapScoreRange 10 \
+          --chimMultimapNmax 10 \
+          --chimNonchimScoreDropMin 10 \
+          --peOverlapNbasesMin 12 \
+          --peOverlapMMp 0.1 \
           --chimOutJunctionFormat 1 # required as of STAR v2.6.1
         
 
