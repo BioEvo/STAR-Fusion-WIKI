@@ -1,3 +1,7 @@
+
+Plug-n-play and source-level CTAT genome libs are provided for Human (hg19, GRChg38) and Mouse (contemporary) that are compatible with the corresponding STAR-Fusion software releases and corresponding version of the STAR aligner.
+
+
 | STAR-Fusion version|  STAR aligner version | CTAT Genome Libs |
 |:-------------------|:----------------------|:-----------------|
 | STAR-Fusion v1.6.0  | STAR v2.7.0f    |  TBD             |
