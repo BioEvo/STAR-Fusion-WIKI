@@ -68,7 +68,7 @@ If you're looking to apply STAR-Fusion using a different target, you'll need to 
 
 ## Preparing the genome resource lib
 
-** Preferred **  If you downloaded the large (30G) 'plug-n-play' resource lib, then just untar/gz the archive and use it directly.  
+**Preferred**  If you downloaded the large (30G) 'plug-n-play' resource lib, then just untar/gz the archive and use it directly.  
 
 **Otherwise**, if you downloaded the small (~2G) unprocessed resource lib, then you'll need to prep it for use with STAR-fusion as follows: 
 
