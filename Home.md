@@ -24,10 +24,6 @@ The --recursive parameter is needed to integrate the required submodules.
 
 Type 'make' in the base installation directory.
 
-#### 3. Bioconda install
-
-A [Bioconda recipe](https://github.com/STAR-Fusion/STAR-Fusion/wiki/Conda-installation) is also available for STAR-Fusion.
-
 
 ### Tools Required:
 
