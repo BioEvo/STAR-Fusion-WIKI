@@ -325,7 +325,9 @@ STAR-Fusion could be run like so via Docker, for example, running within the '${
 <a name='Singularity'></a>
 ## Want to use Singularity?
 
-Singularity is easier and safer to use than Docker, and is our preferred method for running STAR-Fusion. All modern releases of STAR-Fusion have a Singularity image (.simg) offered for download from the [release site](https://github.com/STAR-Fusion/STAR-Fusion/releases).  If you have Singularity installed and the .simg file downloaded, you can run STAR-Fusion like so:
+<img src="https://sylabs.io/assets/images/logos/singularity.png">
+
+Singularity is easier and safer to use than Docker, and is our preferred method for running STAR-Fusion. All modern releases of STAR-Fusion have a Singularity image (.simg) offered for download from the [release site](https://github.com/STAR-Fusion/STAR-Fusion/releases).  If you have [Singularity](https://sylabs.io/docs/) installed and the .simg file downloaded, you can run STAR-Fusion like so:
 
 ```
 singularity exec -e -B `pwd` -B /path/to/ctat_genome_lib_build_dir \
