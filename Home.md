@@ -299,6 +299,8 @@ In the included testing/ directory, you'll find a small sample of fastq reads fr
 <a name='Docker'></a>
 ## Want to use Docker?
 
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/602799/images/3238125/moby.svg" width=200 />
+
 We provide a Docker image that contains all software pre-installed for running STAR, STAR-Fusion, and FusionInspector, and it's available here: https://hub.docker.com/r/trinityctat/starfusion/
 
 If you have docker installed, you can pull the image like so:
@@ -325,7 +327,7 @@ STAR-Fusion could be run like so via Docker, for example, running within the '${
 <a name='Singularity'></a>
 ## Want to use Singularity?
 
-<img src="https://sylabs.io/assets/images/logos/singularity.png">
+<img src="https://sylabs.io/assets/images/logos/singularity.png" width=200 >
 
 Singularity is easier and safer to use than Docker, and is our preferred method for running STAR-Fusion. All modern releases of STAR-Fusion have a Singularity image (.simg) offered for download from the [release site](https://github.com/STAR-Fusion/STAR-Fusion/releases).  If you have [Singularity](https://sylabs.io/docs/) installed and the .simg file downloaded, you can run STAR-Fusion like so:
 
