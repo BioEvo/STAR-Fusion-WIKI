@@ -299,11 +299,11 @@ In the included testing/ directory, you'll find a small sample of fastq reads fr
 <a name='Docker'></a>
 ## Want to use Docker?
 
-We provide a Docker image that contains all software pre-installed for running STAR, STAR-Fusion, and FusionInspector, and it's available here: https://hub.docker.com/r/trinityctat/ctatfusion/
+We provide a Docker image that contains all software pre-installed for running STAR, STAR-Fusion, and FusionInspector, and it's available here: https://hub.docker.com/r/trinityctat/starfusion/
 
 If you have docker installed, you can pull the image like so:
 
-    docker pull trinityctat/ctatfusion
+    docker pull trinityctat/starfusion
 
 STAR-Fusion could be run like so via Docker, for example, running within the '${STAR_FUSION_HOME}/Docker' folder, where ${STAR_FUSION_HOME} is your base installation directory for the STAR-Fusion software.
 
@@ -311,7 +311,7 @@ STAR-Fusion could be run like so via Docker, for example, running within the '${
     # below we assume you have your reads_1.fq.gz and reads_2.fq.gz in your current working directory
     # and also have the ctat_genome_lib_build_dir in your current directory.
 
-    docker run -v `pwd`:/data --rm trinityctat/ctatfusion \
+    docker run -v `pwd`:/data --rm trinityctat/starfusion \
         /usr/local/src/STAR-Fusion/STAR-Fusion \
         --left_fq /data/reads_1.fq.gz \
         --right_fq /data/reads_2.fq.gz \
@@ -321,6 +321,24 @@ STAR-Fusion could be run like so via Docker, for example, running within the '${
         --examine_coding_effect \
         --denovo_reconstruct
 
+
+<a name='Singularity'></a>
+## Want to use Singularity?
+
+Singularity is easier and safer to use than Docker, and is our preferred method for running STAR-Fusion. All modern releases of STAR-Fusion have a Singularity image (.simg) offered for download from the [release site](https://github.com/STAR-Fusion/STAR-Fusion/releases).  If you have Singularity installed and the .simg file downloaded, you can run STAR-Fusion like so:
+
+```
+singularity exec -e -B `pwd` -B /path/to/ctat_genome_lib_build_dir \
+        star-fusion-v$version.simg \
+        /usr/local/src/STAR-Fusion/STAR-Fusion \
+        --left_fq reads_1.fq.gz \
+        --right_fq reads_2.fq.gz \
+        --genome_lib_dir /path/to/ctat_genome_lib_build_dir \
+        -O StarFusionOut \
+        --FusionInspector validate \
+        --examine_coding_effect \
+        --denovo_reconstruct
+```
 
 <a name='ContactUs'></a>
 ## Contact Us
