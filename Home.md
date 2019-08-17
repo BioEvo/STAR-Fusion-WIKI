@@ -123,31 +123,38 @@ If you have single-end FASTQ files, just use the --left_fq parameter:
 
 It's not always the case that you want to have STAR-Fusion run STAR directly, as you may have already run STAR earlier on, or prefer to run STAR separately to use the outputs in other processes such as for expression estimates or variant detection.
 
-Parameters that we recommend for running STAR as part of STAR-Fusion are as follows:
+Parameters that we recommend for running STAR (as of STAR-v2.7.2a) as part of STAR-Fusion are as follows:
 
+```
      STAR --genomeDir ${star_index_dir} \                                                                                     
           --readFilesIn ${left_fq_filename} ${right_fq_filename} \                                                                      
-          --twopassMode Basic \                                                                                                      
-          --outReadsUnmapped None \                                                                                                  
-          --chimSegmentMin 12 \                                                                                                    
-          --chimJunctionOverhangMin 12 \                                                                                           
-          --alignSJDBoverhangMin 10 \                                                                                              
-          --alignMatesGapMax 100000 \                                                                                             
-          --alignIntronMax 100000 \                                                                                                
-          --chimSegmentReadGapMax 3 \                                                                                    
-          --alignSJstitchMismatchNmax 5 -1 5 5 \
-          --runThreadN ${THREAD_COUNT} \                                                                                                           
-          --outSAMstrandField intronMotif \
-          --outSAMunmapped Within \
-          --outSAMtype BAM Unsorted \
+          --outReadsUnmapped None \
+          --twopassMode Basic \
+          --readFilesCommand "gunzip -c" \
+          --outSAMstrandField intronMotif \  # include for potential use with StringTie for assembly
+          --outSAMunmapped Within 
+```
+
+and including the following parameters that are relevant to fusion detection and STAR-Fusion execution:
+
+```
+          --chimSegmentMin 12 \  # ** essential to invoke chimeric read detection & reporting **
+          --chimJunctionOverhangMin 12 \
+          --chimOutJunctionFormat 1 \   # **essential** includes required metadata in Chimeric.junction.out file.
+          --alignSJDBoverhangMin 10 \
+          --alignMatesGapMax 100000 \   # avoid readthru fusions within 100k
+          --alignIntronMax 100000 \
+          --alignSJstitchMismatchNmax 5 -1 5 5 \   # settings improved certain chimera detections
           --outSAMattrRGline ID:GRPundef \
-          --chimMultimapScoreRange 10 \
-          --chimMultimapNmax 10 \
+          --chimMultimapScoreRange 3 \
+          --chimScoreJunctionNonGTAG -4 \
+          --chimMultimapNmax 20 \
           --chimNonchimScoreDropMin 10 \
           --peOverlapNbasesMin 12 \
-          --peOverlapMMp 0.1 \
-          --chimOutJunctionFormat 1 # required as of STAR v2.6.1
-        
+          --peOverlapMMp 0.1 
+```          
+
+>Essential parameters for use with STAR-Fusion are indicted. Others are current settings used when the alignment is performed with STAR-Fusion.        
 
 This will (in part) generate a file called 'Chimeric.out.junction', which is used by STAR-Fusion like so:
 
