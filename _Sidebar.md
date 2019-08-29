@@ -1,5 +1,5 @@
 * [STAR-Fusion Wiki Home](Home)
-* [Installing STAR-Fusion](Home#Installation)
+* [Installing STAR-Fusion](installing-star-fusion)
 * [Software Compatibility Matrix](STAR-Fusion-release-and-CTAT-Genome-Lib-Compatibility-Matrix)
 * [Computing/Hardware Requirements](Home#ComputeRequirements)
 * [Running STAR-Fusion](Home#RunnningStarF)
