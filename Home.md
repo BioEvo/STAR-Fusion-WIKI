@@ -70,7 +70,7 @@ If you're looking to apply STAR-Fusion using a different target, you'll need to 
 
 **Preferred**  If you downloaded the large (30G) 'plug-n-play' resource lib, then just untar/gz the archive and use it directly.  
 
-**Otherwise**, if you downloaded the small (~4G) unprocessed resource lib, then you'll need to prep it for use with STAR-fusion as follows: 
+**Otherwise**, if you downloaded the much smaller (~4G) unprocessed resource lib, then you'll need to prep it for use with STAR-fusion as follows: 
 
      (only if building from source archive - note plug-n-play is preferred!)   
 
