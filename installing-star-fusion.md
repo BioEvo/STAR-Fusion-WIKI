@@ -1,6 +1,6 @@
 # Installing STAR-Fusion
 
-In addition to STAR-Fusion, the following tools and resource data sets must be installed.
+STAR-Fusion requires the following software and data resources to be installed. The easiest STAR-Fusion solution is to leverage our Docker or Singularity images and a plug-n-play data repo, which will let you hit the ground running!
 
 #### 1. Downloading a STAR-Fusion Release (**Preferred**)
 
