@@ -85,12 +85,12 @@ Note, the above builder has a number of additional software requirements includi
     
     % singularity exec -e star-fusion.simg \
        /usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl \
-          --genome_fa GRCh37.p13.genome.primary.fa \
-          --gtf gencode.v19.annotation.gtf \
-          --fusion_annot_lib fusion_lib.Mar2019.dat.gz \
+          --genome_fa genome.primary.fa \
+          --gtf gencode.*.annotation.gtf \
+          --fusion_annot_lib fusion_lib.*.dat.gz \
           --annot_filter_rule AnnotFilterRule.pm \
           --pfam_db Pfam-A.hmm \
-          --human_gencode_filter
+          --human_gencode_filter  # include only if human data
 
 
 
