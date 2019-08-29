@@ -86,6 +86,19 @@ The latest release of STAR-Fusion will be compatible with the currently availabl
                              --pfam_db Pfam-A.hmm \
                              --human_gencode_filter
 
+Note, the above builder has a number of additional software requirements including blast, hmmer, among others.  See the [ctat-genome-lib-builder wiki](https://github.com/NCIP/ctat-genome-lib-builder/wiki) for full installation details.  Using our Docker or Singularity images for doing this step is easiest and preferred if you're planning to go this route.  For example, **if you have Singularity installed**, you can leverage the singularity image we provide on our release downloads page and run like so:
+
+    singularity exec -e star-fusion.vpre.1.7.0.simg \
+       /usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl \
+          --genome_fa GRCh37.p13.genome.primary.fa \
+          --gtf gencode.v19.annotation.gtf \
+          --fusion_annot_lib fusion_lib.Mar2019.dat.gz \
+          --annot_filter_rule AnnotFilterRule.pm \
+          --pfam_db Pfam-A.hmm \
+          --human_gencode_filter
+
+
+
 Once the build process completes successfully, you can then refer to the above like so with STAR-Fusion:
 
        STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib   ...
