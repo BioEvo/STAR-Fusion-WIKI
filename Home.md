@@ -63,7 +63,7 @@ A reference genome and corresponding protein-coding gene annotation set, includi
 The latest release of STAR-Fusion will be compatible with the currently available version of the [CTAT resource genome lib](<https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/>).  For older versions of STAR-Fusion, see the [STAR-Fusion release and CTAT Genome Lib Compatibility Matrix](STAR-Fusion-release-and-CTAT-Genome-Lib-Compatibility-Matrix).
 
 
-If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [ctat-genome-lib-builder](https://github.com/NCIP/ctat-genome-lib-builder/wiki) resource builder.  The ctat-genome-lib-builder comes included in the STAR-Fusion software.
+>**If you're looking to apply STAR-Fusion using a different target**, you'll need to generate the required resources as described by our [ctat-genome-lib-builder](https://github.com/NCIP/ctat-genome-lib-builder/wiki) resource builder.  The ctat-genome-lib-builder comes included in the STAR-Fusion software.
 
 
 ## Preparing the genome resource lib
