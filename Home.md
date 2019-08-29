@@ -153,7 +153,11 @@ FusionInspector can be run in either 'inspect' or 'validate' mode when executed 
 
 *  '**--FusionInspector validate**': involves a more rigorous process of reevaluating the entire set of input reads, aligning the reads to a combination of the reference genome and a set of fusion-gene contigs based on the STAR-Fusion predictions. Reads mapping better to the fusion-gene contigs than the reference genome are identified and reported, fusions are re-scored/quantified, and fusion transcript allelic fractions are computed.
 
-If either mode is invoked, STAR-Fusion will run FusionInspector and create a FusionInspector/ output subdirectory containing all relevant output files.  See the [FusionInspector Wiki]( <https://github.com/FusionInspector/FusionInspector/wiki>) for documentation on output files and loading results into IGV for visualization. 
+If either mode is invoked, STAR-Fusion will run FusionInspector and create a FusionInspector/ output subdirectory containing all relevant output files.  See the [FusionInspector Wiki]( <https://github.com/FusionInspector/FusionInspector/wiki>) for documentation on output files and loading results into IGV for visualization, or leveraging the html-based igv-reports.  
+
+An example html-report interactive fusion visualization is shown below:
+
+<img src="https://raw.githubusercontent.com/wiki/FusionInspector/FusionInspector/images/FusionInspector_igv_report.png" />
 
 <a name='ExamineCodingEffect'></a>
 ## Examine Effect of Fusions on Coding Regions
