@@ -6,7 +6,7 @@ STAR-Fusion is a component of the [Trinity Cancer Transcriptome Analysis Toolkit
 
 ## Obtaining and Installing STAR-Fusion
 
-See [STAR-Fusion installation instructions wiki pages](installing-star-fusion)
+See [STAR-Fusion installation instructions wiki pages](installing-star-fusion).
 
 <a name='RunnningStarF'></a>
 
