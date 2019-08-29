@@ -63,25 +63,28 @@ A reference genome and corresponding protein-coding gene annotation set, includi
 The latest release of STAR-Fusion will be compatible with the currently available version of the [CTAT resource genome lib](<https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/>).  For older versions of STAR-Fusion, see the [STAR-Fusion release and CTAT Genome Lib Compatibility Matrix](STAR-Fusion-release-and-CTAT-Genome-Lib-Compatibility-Matrix).
 
 
-If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [FusionFilter](http://FusionFilter.github.io) resource builder.  FusionFilter comes included in the STAR-Fusion software.
+If you're looking to apply STAR-Fusion using a different target, you'll need to generate the required resources as described by our [ctat-genome-lib-builder](https://github.com/NCIP/ctat-genome-lib-builder/wiki) resource builder.  The ctat-genome-lib-builder comes included in the STAR-Fusion software.
 
 
 ## Preparing the genome resource lib
 
 **Preferred**  If you downloaded the large (30G) 'plug-n-play' resource lib, then just untar/gz the archive and use it directly.  
 
-**Otherwise**, if you downloaded the small (~2G) unprocessed resource lib, then you'll need to prep it for use with STAR-fusion as follows: 
+**Otherwise**, if you downloaded the small (~4G) unprocessed resource lib, then you'll need to prep it for use with STAR-fusion as follows: 
+
+     (only if building from source archive - note plug-n-play is preferred!)   
 
      %  tar xvf CTAT_resource_lib.tar.gz
 
      %  cd CTAT_resource_lib/
 
-     %  $STAR_FUSION_HOME/FusionFilter/prep_genome_lib.pl \
+     %  $STAR_FUSION_HOME/ctat-genome-lib-builder/prep_genome_lib.pl \
                              --genome_fa ref_genome.fa \
-                             --gtf ref_annot.gtf \
-                             --fusion_annot_lib CTAT_HumanFusionLib.dat.gz \
+                             --gtf gencode.*.annotation.gtf \
+                             --fusion_annot_lib fusion_lib.*.dat.gz \
                              --annot_filter_rule AnnotFilterRule.pm \
-                             --pfam_db PFAM.domtblout.dat.gz
+                             --pfam_db Pfam-A.hmm \
+                             --human_gencode_filter
 
 Once the build process completes successfully, you can then refer to the above like so with STAR-Fusion:
 
