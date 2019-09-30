@@ -2,7 +2,7 @@
 
 STAR-Fusion requires the following software and data resources to be installed. 
 
->Note, if you can use our [Docker](https://github.com/STAR-Fusion/STAR-Fusion/wiki#Docker) or Singularity(https://github.com/STAR-Fusion/STAR-Fusion/wiki#Singularity) images, then you'll have all the software pre-installed and can hit the ground running. Just install the [data resources required](#data_resources_required) below.
+>Note, if you can use our [Docker](https://github.com/STAR-Fusion/STAR-Fusion/wiki#Docker) or [Singularity](https://github.com/STAR-Fusion/STAR-Fusion/wiki#Singularity) images, then you'll have all the software pre-installed and can hit the ground running. Just install the [data resources required](#data_resources_required) below.
 
 #### 1. Downloading a STAR-Fusion Release (**Preferred**)
 
