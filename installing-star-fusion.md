@@ -1,5 +1,7 @@
 # Installing STAR-Fusion
 
+>Note, if you can use our [Docker](https://github.com/STAR-Fusion/STAR-Fusion/wiki#Docker) or Singularity(https://github.com/STAR-Fusion/STAR-Fusion/wiki#Singularity) images, then you'll have all the software pre-installed and can hit the ground running. Just install the [data resources required](#data_resources_required) below.
+
 STAR-Fusion requires the following software and data resources to be installed. The easiest STAR-Fusion solution is to leverage our Docker or Singularity images and a plug-n-play data repo, which will let you hit the ground running!
 
 #### 1. Downloading a STAR-Fusion Release (**Preferred**)
@@ -53,6 +55,7 @@ When the '--FusionInspector validate' mode is used, memory requirements can incr
 
 Execution times are largely determined by how long it takes for STAR to align reads. The fusion-finding component generally takes minutes on large samples.  If '--FusionInspector validate' mode is used, then roughly double the total execution time, as STAR is needed to perform an additional full alignment of the reads in FusionInspector mode.
 
+<a name='data_resources_required'></a>
 ### Data Resources Required:
 
 A reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.  We provide several alternative resources for human fusion transcript detection depending on whether you want to use GRCh37 or GRCh38 reference human genomes and corresponding [Gencode](https://www.gencodegenes.org/) annotation sets.  Options are available here: <https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/>, so choose one, and below we refer to it as 'CTAT_resource_lib.tar.gz'.  The 'plug-n-play' libs are that... just download, unpack it (tar -zxvf filename.tar.gz)   
