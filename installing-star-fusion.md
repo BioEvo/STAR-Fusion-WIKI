@@ -36,6 +36,9 @@ Type 'make' in the base installation directory.
        install JSON::XS
        install PerlIO::gzip
 
+If you plan on using the included FusionInspector for 'inspect' or 'validate' modes, please install the [FusionInspector dependencies](https://github.com/FusionInspector/FusionInspector/wiki/installing-FusionInspector).
+
+
 <a name='ComputeRequirements'></a>
 ## Computing / Hardware Requirements and Execution Times
 
