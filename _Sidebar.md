@@ -5,6 +5,7 @@
 * [Running STAR-Fusion](Home#RunnningStarF)
    * [Running from FASTQ files](Home#RunFromFastq)
    * [Kickstart mode](Home#KickstartMode)
+   * Run using [Docker](Home#Docker) or [Singularity](Home#Singularity)
 * [Fusion Outputs](Home#Outputs)
 * [Inspection and Validation](Home#InspectionValidation)
 * [Fusion Annotation](Home#FusionAnnotation)
