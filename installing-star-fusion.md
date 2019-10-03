@@ -83,7 +83,8 @@ The latest release of STAR-Fusion will be compatible with the currently availabl
                              --gtf gencode.*.annotation.gtf \
                              --fusion_annot_lib fusion_lib.*.dat.gz \
                              --annot_filter_rule AnnotFilterRule.pm \
-                             --pfam_db Pfam-A.hmm \
+                             --pfam_db current \
+                             --dfam_db human \
                              --human_gencode_filter
 
 Note, the above builder has a number of additional software requirements including blast, hmmer, among others.  See the [ctat-genome-lib-builder wiki](https://github.com/NCIP/ctat-genome-lib-builder/wiki) for full installation details.  Using our Docker or Singularity images for doing this step is easiest and preferred if you're planning to go this route.  For example, **if you have Singularity installed**, you can leverage the singularity image we provide on our release downloads page and run like so:
@@ -95,7 +96,8 @@ Note, the above builder has a number of additional software requirements includi
           --gtf gencode.*.annotation.gtf \
           --fusion_annot_lib fusion_lib.*.dat.gz \
           --annot_filter_rule AnnotFilterRule.pm \
-          --pfam_db Pfam-A.hmm \
+          --pfam_db current \
+          --dfam_db human \
           --human_gencode_filter  # include only if human data
 
 
